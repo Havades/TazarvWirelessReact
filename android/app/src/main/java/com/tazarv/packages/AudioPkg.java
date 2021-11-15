@@ -1,14 +1,16 @@
-package com.tazarv;
+package com.tazarv.packages;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.tazarv.modules.PlayerModule;
+import com.tazarv.modules.TCPModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MyPackage implements ReactPackage {
+public class AudioPkg implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -19,8 +21,10 @@ public class MyPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new MyModule(reactContext));
+
+        modules.add(new PlayerModule(reactContext));
 
         return modules;
     }
+
 }

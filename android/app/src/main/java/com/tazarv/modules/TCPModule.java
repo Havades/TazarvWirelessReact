@@ -10,7 +10,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.*;
 import com.tazarv.database.entity.Media;
 import com.tazarv.database.repository.MediaRepository;
-import com.tazarv.models.TCPModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +31,12 @@ public class TCPModule extends ReactContextBaseJavaModule {
         Toast.makeText(getReactApplicationContext() , "From TCP : " + message , Toast.LENGTH_LONG).show();
     }
     @ReactMethod(isBlockingSynchronousMethod = true)
-    public WritableMap TestModel(){
-        TCPModel model = new TCPModel(1000 , "192.168.1.1" , 5000 , false);
-        return model.ToJsMap();
-    }
-    @ReactMethod(isBlockingSynchronousMethod = true)
     public WritableArray StartDB(){
         MediaRepository mediaRepository = new MediaRepository(context);
         return ToJsMapList(mediaRepository.SelectAll());
     }
-    public WritableArray ToJsMapList(List<Media> mediaList) {
+
+    private WritableArray ToJsMapList(List<Media> mediaList) {
         WritableArray mediaArray = Arguments.createArray();
         for(Media media : mediaList){
             WritableMap map = Arguments.createMap();
