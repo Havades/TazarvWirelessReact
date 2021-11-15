@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class MyModule extends ReactContextBaseJavaModule {
-    MyModule(ReactApplicationContext context) {
+    public MyModule(ReactApplicationContext context) {
         super(context);
     }
 
