@@ -16,7 +16,7 @@
   StyleSheet
  } from 'react-native';
  
- const {MyModule , TCPModule} = NativeModules;
+ const {TCPModule} = NativeModules;
  
  const App = () => {
  
@@ -24,10 +24,6 @@
      <View style={{display: 'flex' , flex : 1}}>
        <View style={{flex : 1}}>
          <Text> App.js File </Text>
-       </View>
-       <View style={{flex : 1}}>
-         <Button title="Native Toast"
-           onPress={() => MyModule.MakeToast("Omid Is Back :D")}/>
        </View>
        <View style={{flex : 1}}>
          <Button title="Native Toast TCP module" 
