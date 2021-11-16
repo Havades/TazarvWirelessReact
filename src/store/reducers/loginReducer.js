@@ -5,11 +5,15 @@ const initialState = {
 const loginReducer = (state = initialState , action) => {
     switch(action.type){
         case "login" :
-            state.isLoggedIn = true
-            state.userId = action.payload
-            return state; 
+            return {...state ,
+                isLoggedIn : true,
+                userId : action.payload
+             }; 
         case "logout" :
-            state = initialState
+            return {...state ,
+                isLoggedIn : false,
+                userId : -1
+             };
             return state;
         default:
             return state;

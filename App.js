@@ -5,13 +5,17 @@
  * @format
  * @flow strict-local
  */
+import React from 'react'
 import Navigation from './src/navigation'
-import React from 'react';
+import { useSelector } from 'react-redux'
  
+const App = () => {
+
+  const state = useSelector((state) => state)
+
+  console.warn(state, "-------omid-------")
  
- const App = () => {
- 
-   return (
+  return (
     <Navigation/>
    );
  }
