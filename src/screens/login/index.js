@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { View, Text, Button, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { useSelector , useDispatch} from 'react-redux'
 import { bindActionCreators  } from 'redux'
@@ -10,9 +10,8 @@ const Login = () => {
     // const dispatch = useDispatch()
     // const {signIn , signOut} = bindActionCreators(actionCreator , dispatch)
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});
-    const onChangeHandle = (e) => {
-        e.target.name
-    }
+    
+    const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
     const onSubmit = (e) => {
         
     }
@@ -27,13 +26,15 @@ const Login = () => {
                         <Text style={styles.text}>
                             نام کاربری :
                         </Text>
-                        <TextInput style={styles.input}
-                            placeholder="admin"
+                        <TextInput style={styles.input} 
+                            onChangeText={(e) => onChangeHandle(e , "username")}
+                            placeholder="admin" name="username"
                         />
                         <Text style={styles.text}>
                             رمز عبور :
                         </Text>
                         <TextInput style={styles.input} 
+                            onChangeText={(e) => onChangeHandle(e , "password")}
                             placeholder="admin123"
                             secureTextEntry={true}
                         />
