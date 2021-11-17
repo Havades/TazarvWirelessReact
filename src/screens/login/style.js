@@ -10,19 +10,9 @@ export default StyleSheet.create({
         width : '100%',
     },
     container : {
-        flex : 1,
-        alignItems : "center",
-        justifyContent : "center"
-    },
-    view : {
-        justifyContent : "center",
-        alignContent : "center",
-        backgroundColor : 'orange',
-        marginTop : '20%',
-        padding : 20,
-        marginBottom : 50,
-        width : '90%',
-        borderRadius : 20
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
     },
     text : {
         height : 25,
@@ -32,25 +22,19 @@ export default StyleSheet.create({
         width : '90%',
         textAlignVertical : 'center'
     },
-    txtTop: {
-        height : 40,
-        margin : 10,
-        fontSize : 20,
-        fontWeight : 'bold',
-        textAlign : 'center',
-        textAlignVertical : 'center'
-    },
     input : {
         height : 40,
+        width : '90%',
         margin : 10,
         backgroundColor : 'white',
         textAlign : 'center',
-        borderRadius : 20,
+        borderRadius : 15,
         fontSize : 15
     },
     button : {
         marginTop : 10,
         height : 40,
+        width : '90%',
         margin : 5,
         textAlign : 'center',
         backgroundColor : 'dodgerblue',

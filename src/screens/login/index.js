@@ -1,9 +1,10 @@
 import React , {useState} from 'react'
-import { View, Text, Button, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text , SafeAreaView, TextInput, TouchableOpacity, ScrollView , Image } from 'react-native'
 import { useSelector , useDispatch} from 'react-redux'
 import { bindActionCreators  } from 'redux'
 import * as actionCreator from './../../store/actions'
 import styles from './style'
+import { LoginTemplate } from './../../components/template'
 
 const Login = () => {    
     // const {isLoggedIn , userId} = useSelector((state) => state.login)
@@ -19,10 +20,7 @@ const Login = () => {
         <SafeAreaView style={styles.safeArea}>
             <ScrollView style={styles.scrollview}> 
                 <View style={styles.container}>
-                    <View style={styles.view}>
-                        <Text style={styles.txtTop}>
-                            نرم افزار بی سیم
-                        </Text>
+                    <LoginTemplate>                   
                         <Text style={styles.text}>
                             نام کاربری :
                         </Text>
@@ -41,7 +39,7 @@ const Login = () => {
                         <TouchableOpacity style={styles.button}>
                             <Text style={styles.txtTouch}> ورود </Text>
                         </TouchableOpacity>
-                    </View>
+                    </LoginTemplate>
                 </View>
             </ScrollView>
         </SafeAreaView>
