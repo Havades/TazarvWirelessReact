@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { View, Text, Button, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { useSelector , useDispatch} from 'react-redux'
 import { bindActionCreators  } from 'redux'
