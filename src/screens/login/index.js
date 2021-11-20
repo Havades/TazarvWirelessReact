@@ -1,30 +1,28 @@
 import React , {useState} from 'react'
-import { View, Text , SafeAreaView, TextInput, TouchableOpacity, ScrollView , Image } from 'react-native'
-import { useSelector , useDispatch} from 'react-redux'
-import { bindActionCreators  } from 'redux'
-import * as actionCreator from './../../store/actions'
+import { View, Text , TextInput, TouchableOpacity, Image, Alert, ScrollView } from 'react-native'
+import { useSelector} from 'react-redux'
 import styles from './style'
-import { LoginTemplate } from './../../components/template'
-
-const Login = () => {    
-    // const {isLoggedIn , userId} = useSelector((state) => state.login)
-    // const dispatch = useDispatch()
-    // const {signIn , signOut} = bindActionCreators(actionCreator , dispatch)
+import { LoginTemplate , ScreenTemplate } from './../../components/template'
+import { Metrics } from "./../../theme";
+const Login = () => {        
+    const {width ,height ,isPortrait} = useSelector((state) => {
+        console.log('====omid=====', state.screen)
+        return state.screen
+    })
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});
-    
     const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
-    const onSubmit = (e) => {
-        
-    }
+    const onSubmit = (e) => Alert.alert("isPortrait : " + isPortrait + "\nscreenW : " + width)
+
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <ScrollView style={styles.scrollview}> 
+        // <Metrics>
+            <ScreenTemplate>
                 <View style={styles.container}>
+                {/* <ScrollView> */}
                     <LoginTemplate>                   
                         <Text style={styles.text}>
                             نام کاربری :
                         </Text>
-                        <TextInput style={styles.input} 
+                        <TextInput style={styles.input}
                             onChangeText={(e) => onChangeHandle(e , "username")}
                             placeholder="admin" name="username"
                         />
@@ -33,17 +31,17 @@ const Login = () => {
                         </Text>
                         <TextInput style={styles.input} 
                             onChangeText={(e) => onChangeHandle(e , "password")}
-                            placeholder="admin123"
+                            placeholder="admin@123"
                             secureTextEntry={true}
                         />
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.txtTouch}> ورود </Text>
                         </TouchableOpacity>
                     </LoginTemplate>
+                {/* </ScrollView> */}
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+            </ScreenTemplate>
+        //</Metrics> 
     )
 }
-
 export default Login

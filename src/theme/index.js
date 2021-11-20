@@ -1,5 +1,5 @@
-import metrics from './metrics';
+import Metrics from './metrics';
 
 export {
-    metrics
+    Metrics
 }

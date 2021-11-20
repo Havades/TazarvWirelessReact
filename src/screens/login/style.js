@@ -1,23 +1,20 @@
 import { StyleSheet } from "react-native";
+import { Metrics } from "./../../theme";
+import { useSelector } from 'react-redux';
 
 export default StyleSheet.create({
-    safeArea : {
-        flex : 1,
-        backgroundColor : 'grey',
-        direction : 'rtl',
-    },
-    scrollview : {
-        width : '100%',
-    },
     container : {
-        flexDirection:'column',
-        alignItems:'center',
-        justifyContent:'center',
+        flexDirection: 'column',
+        flex : 1,
+        alignItems : 'center',
+        alignContent : 'center',
+        justifyContent : 'center',
     },
     text : {
         height : 25,
         margin : 5,
         fontSize : 20,
+        color : 'white',
         textAlign : 'right',
         width : '90%',
         textAlignVertical : 'center'
@@ -29,7 +26,8 @@ export default StyleSheet.create({
         backgroundColor : 'white',
         textAlign : 'center',
         borderRadius : 15,
-        fontSize : 15
+        fontSize : 15,
+        color : 'black',
     },
     button : {
         marginTop : 10,
@@ -37,7 +35,7 @@ export default StyleSheet.create({
         width : '90%',
         margin : 5,
         textAlign : 'center',
-        backgroundColor : 'dodgerblue',
+        backgroundColor : 'orange',
         borderRadius : 20,
         alignItems : 'center',
         justifyContent : 'center'
@@ -46,8 +44,8 @@ export default StyleSheet.create({
         textAlign : 'center',
         textAlignVertical : 'center',
         fontSize : 20,
-        fontWeight : 'bold',
+        fontWeight : 'normal',
         textShadowColor : 'grey',
-        color : 'white'
+        color : 'black'
     }
 })

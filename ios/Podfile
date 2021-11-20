@@ -3,6 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
+pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
 target 'Tazarv' do
   config = use_native_modules!
 

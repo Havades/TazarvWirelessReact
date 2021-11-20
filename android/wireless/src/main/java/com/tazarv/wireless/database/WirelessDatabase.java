@@ -24,7 +24,7 @@ public abstract class WirelessDatabase extends RoomDatabase {
 
     public abstract MediaDao MediaDao();
 
-    public static  synchronized WirelessDatabase getInstance(Context context){
+    public static synchronized WirelessDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     WirelessDatabase.class , "Wireless_Databse")
