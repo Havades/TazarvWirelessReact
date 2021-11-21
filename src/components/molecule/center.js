@@ -11,6 +11,7 @@ const Center = (props) => {
 
 const styles = StyleSheet.create({
     center : {
+        display : 'flex',
         justifyContent : 'center' ,
         alignContent : 'center' ,
         alignItems : 'center',

@@ -20,13 +20,14 @@ export default StyleSheet.create({
         textAlignVertical : 'center'
     },
     input : {
-        height : 40,
+        height : 35,
         width : '90%',
         margin : 10,
         backgroundColor : 'white',
         textAlign : 'center',
         borderRadius : 15,
-        fontSize : 15,
+        padding : 0,
+        fontSize : 18,
         color : 'black',
     },
     button : {
@@ -34,18 +35,34 @@ export default StyleSheet.create({
         height : 40,
         width : '90%',
         margin : 5,
-        textAlign : 'center',
         backgroundColor : 'orange',
         borderRadius : 20,
-        alignItems : 'center',
         justifyContent : 'center'
     },
     txtTouch : {
         textAlign : 'center',
         textAlignVertical : 'center',
-        fontSize : 20,
+        fontSize : 22,
         fontWeight : 'normal',
         textShadowColor : 'grey',
         color : 'black'
+    },
+    rememberView : {
+        margin : 5,
+        width : '90%',
+        flexDirection: 'row-reverse',
+        justifyContent : 'flex-start'
+    },
+    txtRemember : {
+        fontSize : 20,
+        marginRight : 10,
+        color : 'white',
+        alignSelf : 'flex-end',
+        // backgroundColor : 'red'
+    },
+    switchRemember :{
+        alignSelf : 'flex-start',
+        transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
+        // backgroundColor : 'gold'
     }
 })

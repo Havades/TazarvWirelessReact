@@ -1,23 +1,20 @@
 import React , {useState} from 'react'
-import { View, Text , TextInput, TouchableOpacity, Image, Alert, ScrollView } from 'react-native'
+import { View, Text , TextInput, TouchableOpacity, Alert, Switch } from 'react-native'
 import { useSelector} from 'react-redux'
 import styles from './style'
 import { LoginTemplate , ScreenTemplate } from './../../components/template'
-import { Metrics } from "./../../theme";
-const Login = () => {        
-    const {width ,height ,isPortrait} = useSelector((state) => {
-        console.log('====omid=====', state.screen)
-        return state.screen
-    })
-    const [userInfo , setUserInfo] = useState({username : '' , password : ''});
-    const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
-    const onSubmit = (e) => Alert.alert("isPortrait : " + isPortrait + "\nscreenW : " + width)
 
+const Login = () => {        
+    const {width ,height ,isPortrait} = useSelector((state) => state.screen)
+    const [userInfo , setUserInfo] = useState({username : '' , password : ''});
+    const [isRemember, setIsRemember] = useState(false);
+    const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
+    const onSubmit = (e) => Alert.alert("<User> : " + userInfo.username + " <Pass> : " + userInfo.password + " <Remember> : " + isRemember)
+    const toggleSwitch = () => setIsRemember(previousState => !previousState);
     return (
             <ScreenTemplate>
                 <View style={styles.container}>
-                {/* <ScrollView> */}
-                    <LoginTemplate>                   
+                    <LoginTemplate>
                         <Text style={styles.text}>
                             نام کاربری :
                         </Text>
@@ -33,11 +30,20 @@ const Login = () => {
                             placeholder="admin@123"
                             secureTextEntry={true}
                         />
+                        <View style={styles.rememberView}>
+                            <Switch style={styles.switchRemember}
+                                trackColor={{ false: "darkgrey", true: "orange" }}
+                                thumbColor={"white"}
+                                ios_backgroundColor={"darkgrey"}
+                                onValueChange={toggleSwitch}
+                                value={isRemember}
+                            />
+                            <Text style={styles.txtRemember} onPress={toggleSwitch}> من را به خاطر بسپار </Text>
+                        </View>
                         <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.txtTouch}> ورود </Text>
                         </TouchableOpacity>
                     </LoginTemplate>
-                {/* </ScrollView> */}
                 </View>
             </ScreenTemplate>
     )

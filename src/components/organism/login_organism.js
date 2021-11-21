@@ -1,10 +1,11 @@
 import React from 'react'
-import { View , StyleSheet , Image, Text} from 'react-native'
+import { View , StyleSheet , Image, Text, ScrollView} from 'react-native'
 import { Center } from './../molecule'
 import { OrangeLine } from './../atoms'
 const LoginOrganism = (props) => {
     return (
         <View style={styles.view}>
+            <ScrollView>
             <View style={styles.bar}>
                 <Text style={styles.text}> سامانه بی سیم تذرو </Text>
                 <Image style={styles.image}
@@ -22,6 +23,7 @@ const LoginOrganism = (props) => {
                 <OrangeLine/>
                 {props.children}
             </Center>
+            </ScrollView>
         </View>
     )
 }
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
         // flex : 1,
         flexDirection : 'column',
         width : '100%',
+        backgroundColor : 'grey',
+        borderRadius : 20,
+        padding : 8,
     },
     bar : {
         flexDirection : 'row-reverse',
