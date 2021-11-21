@@ -29,7 +29,7 @@ export default StyleSheet.create({
         color : 'black',
     },
     button : {
-        marginTop : 10,
+        marginTop : 30,
         height : 40,
         width : '90%',
         margin : 5,
