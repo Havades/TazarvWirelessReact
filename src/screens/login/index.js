@@ -14,7 +14,7 @@ const Login = () => {
     return (
             <ScreenTemplate>
                 <View style={styles.container}>
-                    <LoginTemplate>
+                    <LoginTemplate title="سامانه بی سیم تذرو">
                         <Text style={styles.text}>
                             نام کاربری :
                         </Text>
@@ -33,7 +33,7 @@ const Login = () => {
                         <View style={styles.rememberView}>
                             <Switch style={styles.switchRemember}
                                 trackColor={{ false: "darkgrey", true: "orange" }}
-                                thumbColor={"white"}
+                                thumbColor={isRemember ? "white" :"white" }
                                 ios_backgroundColor={"darkgrey"}
                                 onValueChange={toggleSwitch}
                                 value={isRemember}

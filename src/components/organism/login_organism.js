@@ -7,7 +7,7 @@ const LoginOrganism = (props) => {
         <View style={styles.view}>
             <ScrollView>
             <View style={styles.bar}>
-                <Text style={styles.text}> سامانه بی سیم تذرو </Text>
+                <Text style={styles.text}> {props.title} </Text>
                 <Image style={styles.image}
                         source={require('./../../assets/tazarv-log.png')}
                 />
@@ -34,7 +34,12 @@ const styles = StyleSheet.create({
         width : '100%',
         backgroundColor : 'grey',
         borderRadius : 20,
+        borderWidth : 1,
+        borderColor : 'black',
+        borderStyle : 'solid',
+        alignSelf:'center',
         padding : 8,
+        maxWidth : 600,
     },
     bar : {
         flexDirection : 'row-reverse',

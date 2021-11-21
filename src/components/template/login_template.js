@@ -5,7 +5,7 @@ import {LoginOrganism} from './../organism'
 const LoginTemplate = (props) => {
     return (
         <View style={styles.view}>
-            <LoginOrganism>
+            <LoginOrganism title={props.title}>
                 {props.children}
             </LoginOrganism>
         </View>
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         padding : 5 ,
         width : '90%',
-        borderRadius : 20,
     }
 })
 

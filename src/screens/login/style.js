@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Metrics } from "./../../theme";
-import { useSelector } from 'react-redux';
 
 export default StyleSheet.create({
     container : {
@@ -58,11 +56,9 @@ export default StyleSheet.create({
         marginRight : 10,
         color : 'white',
         alignSelf : 'flex-end',
-        // backgroundColor : 'red'
     },
     switchRemember :{
         alignSelf : 'flex-start',
         transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
-        // backgroundColor : 'gold'
     }
 })
