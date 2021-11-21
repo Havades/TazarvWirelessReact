@@ -14,7 +14,6 @@ const Login = () => {
     const onSubmit = (e) => Alert.alert("isPortrait : " + isPortrait + "\nscreenW : " + width)
 
     return (
-        // <Metrics>
             <ScreenTemplate>
                 <View style={styles.container}>
                 {/* <ScrollView> */}
@@ -41,7 +40,6 @@ const Login = () => {
                 {/* </ScrollView> */}
                 </View>
             </ScreenTemplate>
-        //</Metrics> 
     )
 }
 export default Login

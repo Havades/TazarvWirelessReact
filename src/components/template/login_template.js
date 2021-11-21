@@ -14,9 +14,12 @@ const LoginTemplate = (props) => {
 
 const styles = StyleSheet.create({
     view : {
+        flex : 1,
+        alignSelf : 'center',
+        justifyContent : 'center',
+        alignItems : 'center',
         flexDirection : 'column',
         padding : 5 ,
-        backgroundColor : 'grey',
         width : '90%',
         borderRadius : 20,
     }

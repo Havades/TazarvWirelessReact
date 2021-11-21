@@ -53,20 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-      Test();
   }
-
-  private void Test(){
-      try {
-          TestThread thread = new TestThread(getApplicationContext());
-          thread.start();
-          thread.join();
-          Log.d( "data size ---omid", "Size : " + thread.getData().size());
-      }catch (Exception e){
-          Log.e("data size ---omid" , e.getMessage());
-      }
-  }
-
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());

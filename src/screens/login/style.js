@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 export default StyleSheet.create({
     container : {
-        flexDirection: 'column',
         flex : 1,
+        flexDirection: 'column',
         alignItems : 'center',
         alignContent : 'center',
         justifyContent : 'center',

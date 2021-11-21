@@ -6,9 +6,7 @@ const ScreenTemplate = (props) => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
-                {/* <ScrollView style={styles.scrollview}> */}
-                    {props.children}
-                {/* </ScrollView> */}
+                {props.children}
             </LinearGradient>
         </SafeAreaView>
     )
@@ -16,14 +14,10 @@ const ScreenTemplate = (props) => {
 const styles = StyleSheet.create({
     safeArea : {
         flex : 1,
-        backgroundColor : 'grey',
         direction : 'rtl',
     },    
     linearGradient:{
         flex :1
-    },
-    scrollview : {
-        flex : 1
     },
 })
 

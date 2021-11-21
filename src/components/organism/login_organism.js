@@ -27,7 +27,8 @@ const LoginOrganism = (props) => {
 }
 const styles = StyleSheet.create({
     view :{
-        flex : 1,
+        // flex : 1,
+        flexDirection : 'column',
         width : '100%',
     },
     bar : {
