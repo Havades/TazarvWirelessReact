@@ -1,9 +1,9 @@
 import React , {useState} from 'react'
 import { View, Text , TextInput, TouchableOpacity ,Alert,Switch} from 'react-native'
-import { LoginTemplate , ScreenTemplate } from './../../components/template'
+import { LoginTemplate , ScreenTemplate,AppBar } from './../../components/template'
 import styles from './style'
 
-const Setting = () => {
+const Setting = (props) => {
     const [appInfo , setAppInfo] = useState({
                     server : '' , port : 80
                     , sslPort : 443 , isSSL : false 
@@ -18,6 +18,8 @@ const Setting = () => {
         setAppInfo({...appInfo , [name] : !state});
     }
     return (
+        <>
+        <AppBar {...props } title='تنظیمات' isShowSearch={false}/>
         <ScreenTemplate>
             <View style={styles.container}>
                 <LoginTemplate title="تنظیمات نرم افزار">
@@ -90,6 +92,7 @@ const Setting = () => {
                 </LoginTemplate>
             </View>
         </ScreenTemplate>
+    </>
     )
 }
 

@@ -16,6 +16,7 @@ import com.tazarv.wireless.packages.NetworkPkg;
 import com.BV.LinearGradient.LinearGradientPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -25,7 +26,6 @@ public class MainApplication extends Application implements ReactApplication {
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
-
         @Override
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
@@ -34,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
            packages.add(new AudioPkg());
            packages.add(new NetworkPkg());
            packages.add(new LinearGradientPackage());
+//           packages.add(new VectorIconsPackage());
           return packages;
         }
 
@@ -47,8 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
-
-  @Override
+    @Override
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);

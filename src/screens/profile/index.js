@@ -1,14 +1,16 @@
 import React , {useState} from 'react'
 import { View, Text , TextInput, TouchableOpacity ,Alert} from 'react-native'
-import { LoginTemplate , ScreenTemplate } from './../../components/template'
+import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/template'
 import styles from './style'
 
-const Profile = () => {
+const Profile = (props) => {
     const [userInfo , setUserInfo] = useState({oldPass : '' , newPass : '' , repeatPass : ''});
 
     const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
     const onSubmit = (e) => Alert.alert("{ "+userInfo.oldPass+", "+userInfo.newPass+", "+userInfo.repeatPass+"}")
     return (
+        <>
+        <AppBar {...props } title='کاربری' isShowSearch={false}/>
         <ScreenTemplate>
             <View style={styles.container}>
                 <LoginTemplate title={"تنطیمات کاربری"}>
@@ -41,6 +43,7 @@ const Profile = () => {
                 </LoginTemplate>
             </View>
         </ScreenTemplate>
+    </>
     )
 }
 

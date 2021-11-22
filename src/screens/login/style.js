@@ -46,7 +46,7 @@ export default StyleSheet.create({
         color : 'black'
     },
     rememberView : {
-        margin : 5,
+        marginTop : 30,
         width : '90%',
         flexDirection: 'row-reverse',
         justifyContent : 'flex-start'

@@ -1,10 +1,13 @@
 import React from 'react'
 import { Alert, Button, NativeModules, Text, View, StyleSheet } from 'react-native';
+import { AppBar} from './../../components/template'
 
 const {TCPModule} = NativeModules;
  
-const Main = () => {
+const Main = (props) => {
     return (
+      <>
+        <AppBar {...props } title='سامانه بی سیم' isShowSearch={false}/>
         <View style={{display: 'flex' , flex : 1}}>
         <View style={{flex : 1}}>
           <Text> App.js File </Text>
@@ -26,6 +29,7 @@ const Main = () => {
             onPress={() => console.log(TCPModule.StartDB()) }/>
         </View>
       </View>
+    </>
     )
 }
 const styles = StyleSheet.create({
