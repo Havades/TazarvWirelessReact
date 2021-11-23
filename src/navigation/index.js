@@ -10,7 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './style'
 
-const appName = "نرم افزار بی سیم تذرو"
+// const appName = "نرم افزار بی سیم تذرو"
 const routeNames = {
     Main : "خانه",
     Profile: "کاربری",
@@ -22,14 +22,6 @@ const routeNames = {
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Navigation = () => {
-  navigationOptions = ({ navigation }) => {
-    return {
-    title: 'Home',
-    headerLeft: (
-        <Button title="click me"/>    
-        ),
-          };
-    };
     return (
         <NavigationContainer>
             <Drawer.Navigator initialRouteName="Setting"
