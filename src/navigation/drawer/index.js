@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image , View , Text} from 'react-native'
-import { Login , Main , Message , Setting , Profile } from '../../screens';
+import { Login , Main , Message , Setting , Profile ,Test} from '../../screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator , DrawerContentScrollView ,DrawerItemList } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { OrangeLine } from '../../components/atoms';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import styles from './style'
 
 // const appName = "نرم افزار بی سیم تذرو"
@@ -17,6 +18,7 @@ const routeNames = {
     Login: "خروج",
     Message: "پیام ها",
     Setting: "تنظیمات",
+    Test : "تست"
 }
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +56,10 @@ const DrawerNavigation = () => {
                 <Drawer.Screen name="Login" component={Login} options={{ 
                   title: routeNames.Login,
                   drawerIcon: ({focused}) => <MaterialIcons name="logout" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
+                  }}/>
+                <Drawer.Screen name="Test" component={Test} options={{ 
+                  title: routeNames.Test,
+                  drawerIcon: ({focused}) => <Fontisto name="test-tube" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
                   }}/>
             </Drawer.Navigator>
         </NavigationContainer>
