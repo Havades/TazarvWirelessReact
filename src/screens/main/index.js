@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert, Button, NativeModules, Text, View, StyleSheet } from 'react-native';
 
-const {TCPModule} = NativeModules;
+const {TCPModule, DBDataModule} = NativeModules;
  
 const Main = () => {
     return (
@@ -16,8 +16,8 @@ const Main = () => {
         <View style={{flex : 1}}>
           <Button title="Object Test" 
             onPress={() =>{ 
-              const model = TCPModule.TestModel();
-              console.log("Omid Map" , model)
+              const data = DBDataModule.GetData("Tbl_AreaUser")
+              console.log("Map: " , data)
              //  Alert.alert(model.Id + "-\n-" + model.IP + "-\n-" + model.Port + "-\n-" + model.IsConnected);
             }}/>
         </View>

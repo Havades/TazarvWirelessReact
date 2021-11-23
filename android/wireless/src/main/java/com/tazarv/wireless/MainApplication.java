@@ -9,8 +9,12 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.tazarv.BuildConfig;
+import com.tazarv.wireless.classes.CAppStatus;
+import com.tazarv.wireless.database.WirelessDatabase;
 import com.tazarv.wireless.packages.AudioPkg;
+import com.tazarv.wireless.packages.InitializerPkg;
 import com.tazarv.wireless.packages.NetworkPkg;
+import com.tazarv.wireless.utility.network.NetworkManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -31,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
            packages.add(new AudioPkg());
            packages.add(new NetworkPkg());
+           packages.add(new InitializerPkg());
           return packages;
         }
 
@@ -47,9 +52,12 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+      super.onCreate();
+      SoLoader.init(this, /* native exopackage */ false);
+      initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+      CAppStatus.networkManager = new NetworkManager(getApplicationContext());
+      CAppStatus.networkManager.InitializeNetwork();
   }
 
   /**
