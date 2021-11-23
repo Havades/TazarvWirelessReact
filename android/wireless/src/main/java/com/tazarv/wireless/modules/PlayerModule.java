@@ -16,5 +16,4 @@ public class PlayerModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "PlayerModule";
     }
-
 }
