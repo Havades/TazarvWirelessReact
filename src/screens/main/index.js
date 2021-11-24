@@ -1,40 +1,28 @@
-import React from 'react'
+import React , {useState , useEffect} from 'react'
 import { Alert, Button, NativeModules, Text, View, StyleSheet } from 'react-native';
 import { AppBar} from './../../components/template'
+import * as Login from './login_handler'; 
 
-const {TCPModule, DBDataModule} = NativeModules;
- 
+const {AuthModule} = NativeModules;
+
 const Main = (props) => {
+
+  useEffect(() => {
+    const userId = Login.loginCheck(props.navigation , AuthModule)
+    setUserId(userId)
+    Login.onUserIdChange(userId , props.navigation)
+    return () => {}
+  } , [])
+  // useEffect(() => { Login.onUserIdChange(userId , props.navigation) }, [userId]);
+  const [userId , setUserId] = useState(0)
     return (
       <>
         <AppBar {...props } title='سامانه بی سیم' isShowSearch={false}/>
         <View style={{display: 'flex' , flex : 1}}>
-        <View style={{flex : 1}}>
-          <Text> App.js File </Text>
+          <Text style={{flex : 1, textAlign : 'center' , textAlignVertical : 'center' , fontSize : 30}}>
+            User ID : {userId}</Text>
         </View>
-        <View style={{flex : 1}}>
-          <Button title="Native Toast TCP module" 
-            onPress={() => TCPModule.MakeToast("Omid Is Back :S")}/>
-        </View>
-        <View style={{flex : 1}}>
-          <Button title="Object Test" 
-            onPress={() =>{ 
-              const data = DBDataModule.GetData("Tbl_AreaUser")
-              console.log("Map: " , data)
-             //  Alert.alert(model.Id + "-\n-" + model.IP + "-\n-" + model.Port + "-\n-" + model.IsConnected);
-            }}/>
-        </View>
-        <View style={{flex : 1}}>
-          <Button title="Start SQLite" style ={styles.DBButton}
-            onPress={() => console.log(TCPModule.StartDB()) }/>
-        </View>
-      </View>
     </>
     )
 }
-const styles = StyleSheet.create({
-    DBButton : {
-      color : "red"
-    }
-  })
 export default Main

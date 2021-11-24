@@ -1,18 +1,19 @@
 import React , {useState} from 'react'
-import { View, Text , TextInput, TouchableOpacity, Alert, Switch } from 'react-native'
+import { View, Text , TextInput, TouchableOpacity, Alert, Switch ,NativeModules } from 'react-native'
 import { useSelector} from 'react-redux'
 import styles from './style'
+import * as Handler from './login_handler'; 
 import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/template'
-const Login = (props) => {        
-    const {width ,height ,isPortrait} = useSelector((state) => state.screen)
+
+const {AuthModule} = NativeModules;
+
+const Login = (props) => {
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});
     const [isRemember, setIsRemember] = useState(false);
+    const [isWaiting, setIsWaiting] = useState(false);
     const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
-    // const onSubmit = (e) => Alert.alert("<User> : " + userInfo.username + " <Pass> : " + userInfo.password + " <Remember> : " + isRemember)
     const toggleSwitch = () => setIsRemember(previousState => !previousState);
-    const onSubmit = (e) => {
-        
-    }
+    const onSubmit = (e) => Handler.onSubmit(AuthModule , userInfo , isRemember , props.navigation , Alert.alert)
     return (
         <>
         <AppBar {...props } title='ورود' isShowSearch={false}/>
@@ -24,7 +25,8 @@ const Login = (props) => {
                     </Text>
                     <TextInput style={styles.input}
                         onChangeText={(e) => onChangeHandle(e , "username")}
-                        placeholder="admin" name="username"
+                        placeholder="admin"
+                        value={userInfo.username}
                     />
                     <Text style={styles.text}>
                         رمز عبور :
@@ -33,6 +35,7 @@ const Login = (props) => {
                         onChangeText={(e) => onChangeHandle(e , "password")}
                         placeholder="admin@123"
                         secureTextEntry={true}
+                        value={userInfo.password}
                     />
                     <View style={styles.rememberView}>
                         <Switch style={styles.switchRemember}
