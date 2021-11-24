@@ -4,6 +4,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.tazarv.wireless.modules.AuthModule;
 import com.tazarv.wireless.modules.DBDataModule;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class InitializerPkg implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new DBDataModule(reactContext));
+        modules.add(new AuthModule(reactContext));
 
         return modules;
     }

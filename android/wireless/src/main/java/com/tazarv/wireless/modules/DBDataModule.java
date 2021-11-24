@@ -34,20 +34,29 @@ public class DBDataModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    public WritableArray GetData(String aTableName) {
+    public WritableArray GetData(String aTableName, String aWhereClause) {
         WritableArray lWA = null;
         try {
+            String lWhere = "";
+            if(!aWhereClause.isEmpty())
+                lWhere = String.format(" WHERE %s", aWhereClause);
+
+            String lSQL = String.format(
+                    "SELECT * FROM %s%s",
+                    aTableName,
+                    lWhere
+            );
+
             CommandExecutor lCE = new CommandExecutor();
-            JSONArray lJA = lCE.runQuery("select * from " + aTableName);
-            //JSONArray lJA = new JSONArray("[{\"name\":\"amir\",\"family\":\"hashemi\"},{\"name\":\"omid\",\"family\":\"dadvar\"}]");
+            JSONArray lJA = lCE.runQuery(lSQL);
             lWA = ToJsMapList(lJA);
         } catch (Exception ex) {
 
         }
-        return null;
+        return lWA;
     }
 
-    private WritableArray ToJsMapList(JSONArray aRows) throws Exception {
+    public static WritableArray ToJsMapList(JSONArray aRows) throws Exception {
         WritableArray mediaArray = Arguments.createArray();
         for (int i = 0; i<aRows.length(); i++) {
             WritableMap map = Arguments.createMap();
