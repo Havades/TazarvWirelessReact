@@ -8,8 +8,11 @@ const Login = (props) => {
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});
     const [isRemember, setIsRemember] = useState(false);
     const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
-    const onSubmit = (e) => Alert.alert("<User> : " + userInfo.username + " <Pass> : " + userInfo.password + " <Remember> : " + isRemember)
+    // const onSubmit = (e) => Alert.alert("<User> : " + userInfo.username + " <Pass> : " + userInfo.password + " <Remember> : " + isRemember)
     const toggleSwitch = () => setIsRemember(previousState => !previousState);
+    const onSubmit = (e) => {
+        
+    }
     return (
         <>
         <AppBar {...props } title='ورود' isShowSearch={false}/>

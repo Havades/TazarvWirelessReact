@@ -26,7 +26,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
     return (
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Setting"
+            <Drawer.Navigator initialRouteName="Login"
               screenOptions={{
                 headerShown: false,
                 drawerPosition : 'right',
