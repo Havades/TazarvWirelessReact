@@ -9,7 +9,7 @@ import com.tazarv.taclibrary.Classes.CTCPClient;
 import com.tazarv.taclibrary.Helpers.tacHelpers;
 import com.tazarv.wireless.classes.CAppStatus;
 
-public class NetworkManager {
+public class CNetworkManager {
     private Context mContext;
 
     private boolean mIsInitialized = false;
@@ -19,7 +19,7 @@ public class NetworkManager {
     private boolean mIsConnecting = false;
     private String mErrorMessage = "";
 
-    public NetworkManager(Context aContext) {
+    public CNetworkManager(Context aContext) {
         mContext = aContext;
     }
 
@@ -50,8 +50,8 @@ public class NetworkManager {
         if (lIP2.isEmpty())
             lIP2 = lPrefs.getString("InternetServerIP", "");
 
-        final NetworkConnectionTest testConnection = new NetworkConnectionTest(lIP1, lIP2, CAppStatus.Port);
-        testConnection.setOnFinishTestLitener(new NetworkConnectionTest.OnFinishTestListener() {
+        final CNetworkConnectionTest testConnection = new CNetworkConnectionTest(lIP1, lIP2, CAppStatus.Port);
+        testConnection.setOnFinishTestLitener(new CNetworkConnectionTest.OnFinishTestListener() {
             @Override
             public void OnFinishTest(Boolean isOK, String ipMessage) {
                 if (isOK) {

@@ -2,11 +2,10 @@ package com.tazarv.wireless.modules;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.textclassifier.TextClassifierEvent;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresPermission;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -15,14 +14,10 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.tazarv.taclibrary.Classes.CEncrypt;
-import com.tazarv.taclibrary.Classes.CStatus;
-import com.tazarv.taclibrary.DataHelpers.DatabaseHelper;
 import com.tazarv.wireless.classes.CAppStatus;
-
-import org.json.JSONArray;
+import com.tazarv.wireless.utility.network.CServiceCommander;
 
 public class AuthModule extends ReactContextBaseJavaModule {
 
@@ -40,29 +35,50 @@ public class AuthModule extends ReactContextBaseJavaModule {
         return "AuthModule";
     }
 
-    @ReactMethod(isBlockingSynchronousMethod = true)
-    public WritableMap Login() {
+    @ReactMethod
+    public void CheckRemember(Callback aCallback) {
         WritableMap lWM = Arguments.createMap();
+        String lErrorMessage = "";
+
         try {
+            if (!CAppStatus.NetworkManager.IsInitialized())
+                throw new Exception("Network initialize error");
 
             SharedPreferences lPrefs = mContext.getSharedPreferences("wireless", Context.MODE_PRIVATE);
-            int lUserId = lPrefs.getInt("LastUserId",0);
+            int lUserId = lPrefs.getInt("LastUserId", 0);
 
-            lWM = Arguments.createMap();
-            lWM.putBoolean("IsLogin", lUserId > 0);
-            lWM.putInt("UserId", lUserId);
+            if (lUserId <= 0) {
+                lWM.putBoolean("IsLogin", false);
+                lWM.putInt("UserId", 0);
+            } else {
+
+                CServiceCommander.ServiceCommanderResult lSCResult =
+                        CAppStatus.ServiceCommander.InitUser(lUserId);
+
+                if(lSCResult.IsOK) {
+                    lWM.putBoolean("IsLogin", true);
+                    lWM.putInt("UserId", lUserId);
+                } else
+                    throw new Exception(lSCResult.ErrorMessage);
+
+            }
 
         } catch (Exception ex) {
-            Log.e(TAG, "Login: " + ex.getMessage());
+            lErrorMessage = ex.getMessage();
         }
-        return lWM;
+
+        aCallback.invoke(lErrorMessage, lWM);
     }
 
     @ReactMethod
     public void Login(ReadableMap aUserInfo, Callback aCallback) {
         WritableMap lWM = Arguments.createMap();
         String lErrorMessage = null;
+
         try {
+            if (!CAppStatus.NetworkManager.IsInitialized())
+                throw new Exception("Network initialize error");
+
             String lUsername = aUserInfo.getString("Username");
             String lLoginPassword = aUserInfo.getString("Password");
             Boolean lisRemember = aUserInfo.getBoolean("IsRemember");
@@ -85,21 +101,30 @@ public class AuthModule extends ReactContextBaseJavaModule {
                 }
 
                 if (lDcPassword.equals(lLoginPassword)) {
-                    int lUserId = lMap.getInt("UserId");
 
-                    CAppStatus.LoginUserId = lUserId;
-                    CAppStatus.LoginUsername = lUsername;
+                    int lUserId = Integer.valueOf(lMap.getString("UserId"));
 
-                    lWM.putBoolean("IsLogin", true);
-                    lWM.putInt("UserId", lUserId);
+                    CServiceCommander.ServiceCommanderResult lSCResult =
+                            CAppStatus.ServiceCommander.InitUser(lUserId);
 
-                    if(lisRemember) {
-                        //SharedPreferences lPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-                        SharedPreferences lPrefs = mContext.getSharedPreferences("wireless", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor lPrefEditor = lPrefs.edit();
-                        lPrefEditor.putInt("LastUserId", lUserId);
-                        lPrefEditor.apply();
-                    }
+                    if(lSCResult.IsOK) {
+
+                        CAppStatus.LoginUserId = lUserId;
+                        CAppStatus.LoginUsername = lUsername;
+
+                        lWM.putBoolean("IsLogin", true);
+                        lWM.putInt("UserId", lUserId);
+
+                        if (lisRemember) {
+                            SharedPreferences lPrefs = mContext.getSharedPreferences("wireless", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor lPrefEditor = lPrefs.edit();
+                            lPrefEditor.putInt("LastUserId", lUserId);
+                            lPrefEditor.putString("LastUserName", lUsername);
+                            lPrefEditor.apply();
+                        }
+
+                    } else
+                        throw new Exception(lSCResult.ErrorMessage);
 
                 } else
                     throw new Exception("incorrect username or password");
