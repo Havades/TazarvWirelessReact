@@ -14,16 +14,21 @@ const onUserIdChange = (userId , navigation) =>
             break;
     }
 }
-const loginCheck = (navigation , AuthModule) =>
+const loginCheck = (navigation ,route, AuthModule , setUserId) =>
 {
-    console.log(navigation.route)
-    if(typeof navigation.route!== 'undefined')
-        return navigation.route.params.userId
-    let res = AuthModule.CheckRemember()
-    if(res.IsLogin)
-        return res.UserId
-    return -1;
+    console.log(route)
+    if(typeof route !== 'undefined'){
+        // setUserId(route.params.userId)
+        return;
+    }
+    AuthModule.CheckRemember((error , res) => {
+        if(res.IsLogin)
+            setUserId(res.UserId)
+        else
+            navigation.navigate('Login')
+    })
 }
+
 export {
     onUserIdChange,
     loginCheck

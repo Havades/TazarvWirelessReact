@@ -7,13 +7,14 @@ const onSubmit = (AuthModule, userInfo ,isRemember , navigation , alert) =>
         IsRemember : isRemember
     }
     AuthModule.Login( params , (error , res) => {
-        
-    navigation.navigate('Main' , {userId : 50})
-    // if(res.IsLogin)
-    //     navigation.navigate('Main' , {userId : res.UserId})
-    // else
-    //     alert(error)
-   }) 
+    console.log('--error--', error);
+    console.log('--result--', res.UserId);
+    navigation.navigate('Main' , { userId : 50 })
+    if(res.IsLogin)
+        navigation.navigate('Main' , { userId : res.UserId })
+    else
+        alert(error)
+   })
 }
 // function pause(milliseconds) {
 // 	var dt = new Date();

@@ -37,6 +37,10 @@ const DrawerNavigation = () => {
               }}
                 drawerContent={(props) => <CustomDrawerContent {...props} />}
                 >
+                <Drawer.Screen name="Profile" component={Profile} options={{ 
+                  title: routeNames.Profile,
+                  drawerIcon: ({focused}) => <MaterialCommunityIcons name="account-settings" style={styles.icon} size={30} color={focused? "orange":"white"}/>
+                  }}/>
                 <Drawer.Screen name="Main" component={Main} options={{ 
                     title: routeNames.Main,
                     drawerIcon: ({focused}) => <MaterialIcons name="home" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
@@ -44,10 +48,6 @@ const DrawerNavigation = () => {
                 <Drawer.Screen name="Message" component={Message} options={{ 
                   title: routeNames.Message,
                   drawerIcon: ({focused}) => <MaterialCommunityIcons name="android-messages" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
-                  }}/>
-                <Drawer.Screen name="Profile" component={Profile} options={{ 
-                  title: routeNames.Profile,
-                  drawerIcon: ({focused}) => <MaterialCommunityIcons name="account-settings" style={styles.icon} size={30} color={focused? "orange":"white"}/>
                   }}/>
                 <Drawer.Screen name="Setting" component={Setting} options={{ 
                   title: routeNames.Setting,

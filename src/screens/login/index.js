@@ -1,13 +1,20 @@
-import React , {useState} from 'react'
-import { View, Text , TextInput, TouchableOpacity, Alert, Switch ,NativeModules } from 'react-native'
+import React , {useState , useEffect , useCallback} from 'react'
+import { View, Text , BackHandler , TextInput, TouchableOpacity, Alert, Switch ,NativeModules } from 'react-native'
 import { useSelector} from 'react-redux'
 import styles from './style'
 import * as Handler from './login_handler'; 
+import { useFocusEffect } from '@react-navigation/native';
 import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/template'
 
 const {AuthModule} = NativeModules;
 
 const Login = (props) => {
+    useFocusEffect(
+        useCallback(() => {
+            const event = BackHandler.addEventListener("hardwareBackPress" , () => BackHandler.exitApp())
+            return () => event.remove()
+        } , []
+      ));
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});
     const [isRemember, setIsRemember] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
