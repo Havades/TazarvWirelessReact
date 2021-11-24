@@ -3,21 +3,15 @@ package com.tazarv.wireless.modules;
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ContextBaseJavaModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.tazarv.taclibrary.Classes.CCommandResult;
-import com.tazarv.wireless.database.entity.Media;
-import com.tazarv.wireless.database.repository.MediaRepository;
-import com.tazarv.wireless.utility.network.CommandExecutor;
+import com.tazarv.wireless.utility.network.CCommandExecutor;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 public class DBDataModule extends ReactContextBaseJavaModule {
     ReactApplicationContext mContext;
@@ -47,7 +41,7 @@ public class DBDataModule extends ReactContextBaseJavaModule {
                     lWhere
             );
 
-            CommandExecutor lCE = new CommandExecutor();
+            CCommandExecutor lCE = new CCommandExecutor();
             JSONArray lJA = lCE.runQuery(lSQL);
             lWA = ToJsMapList(lJA);
         } catch (Exception ex) {

@@ -11,7 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
-public class NetworkConnectionTest extends AsyncTask<Integer, Integer, Boolean> {
+public class CNetworkConnectionTest extends AsyncTask<Integer, Integer, Boolean> {
     private final String TAG = "CTestConnection";
 
     private Boolean mIsConnected = false;
@@ -22,7 +22,7 @@ public class NetworkConnectionTest extends AsyncTask<Integer, Integer, Boolean> 
     private OnFinishTestListener mOnFinishTestLitener = null;
 
 
-    public NetworkConnectionTest(String aIP1, String aIP2, int aPort) {
+    public CNetworkConnectionTest(String aIP1, String aIP2, int aPort) {
         mIP1 = aIP1;
         mIP2 = aIP2;
         mPort = aPort;

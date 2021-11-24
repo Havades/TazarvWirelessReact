@@ -1,10 +1,13 @@
 package com.tazarv.wireless.classes;
 
-import com.tazarv.wireless.utility.network.NetworkManager;
+import com.tazarv.wireless.utility.network.CServiceCommander;
+import com.tazarv.wireless.utility.network.CNetworkManager;
 
 public class CAppStatus {
     public static int Port = 6835;
-    public static NetworkManager networkManager = null;
+
+    public static CNetworkManager NetworkManager = null;
+    public static CServiceCommander ServiceCommander = null;
 
     public static int LoginUserId = 0;
     public static String LoginUsername = "";

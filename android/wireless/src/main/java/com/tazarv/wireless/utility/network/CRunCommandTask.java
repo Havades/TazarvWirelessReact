@@ -11,13 +11,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CRunCommandTask extends AsyncTask<String,Void,String> {
-    private String mTableName = "", mPKIdName = "";
 
-    private boolean mIsCreateTable = false;
+    private RunCommandTaskParams mTaskParams = null;
     private boolean mIsRunFinished = false;
     private boolean mIsRunning = false;
     private CSocketData mSD = null;
-    private OnTaskFinishListener mOnTaskFinishListener = null;
+    private String mResultData = "";
 
     private String mErrorMessage = "";
 
@@ -30,18 +29,18 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
     public CSocketData getSocketDate() {
         return mSD;
     }
+    public String getResultData() {
+        return mResultData;
+    }
     public String getErrorMessage() {
         return mErrorMessage;
     }
 
     public CRunCommandTask(RunCommandTaskParams aParams) {
         mErrorMessage = "";
-        if(aParams!=null) {
-            mOnTaskFinishListener = aParams.onTaskFinishListener;
-            mIsCreateTable = aParams.IsCreateTable;
-            mTableName = aParams.TableName;
-            mPKIdName = aParams.PKIdName;
-        }
+        mTaskParams = aParams;
+        if(mTaskParams==null)
+            mTaskParams = new CRunCommandTask.RunCommandTaskParams();
     }
 
     @Override
@@ -54,27 +53,33 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... aCommands) {
         CSocketData lSD = null;
         String lErrMsg = "";
+        String lResultData = "";
 
         try {
-            String lCommand = "<SQL>" + aCommands[0];
-            CTCPClient lTCP = CAppStatus.networkManager.getMainTCP();
+            String lCommand = (mTaskParams.IsSQLCommand ? "<SQL>" : "") + aCommands[0];
+            CTCPClient lTCP = CAppStatus.NetworkManager.getMainTCP();
 
             boolean lIsTimeout = lTCP.WaitToEndRunning();
             if(!lIsTimeout) {
-                String lResultData = lTCP.runCommand(lCommand, null, null, 20000);
+                lResultData = lTCP.runCommand(lCommand, null, null, 20000);
                 if (lResultData.isEmpty()) {
-                    String lErr = CAppStatus.networkManager.getMainTCP().getErrorMessage();
+                    String lErr = CAppStatus.NetworkManager.getMainTCP().getErrorMessage();
                     throw new Exception(lErr);
                 }
 
                 if(lResultData.endsWith("\t"))
                     lResultData = lResultData.replaceAll("\t$","");
 
-                lSD = new CSocketData("Res");
-                lSD.GetDataFromStreamStr(lResultData);
+                if(mTaskParams.IsSQLCommand) {
 
-                if (lSD == null)
-                    lErrMsg = lSD.getErrorMassage();
+                    lSD = new CSocketData("Res");
+                    lSD.GetDataFromStreamStr(lResultData);
+
+                    if (lSD == null)
+                        lErrMsg = lSD.getErrorMassage();
+
+                }
+
             } else
                 throw new Exception("TCP Timeout");
 
@@ -85,7 +90,9 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
         mIsRunning = false;
         mIsRunFinished = true;
         mSD = lSD;
+        mResultData = lResultData;
 
+        mErrorMessage = lErrMsg;
         return lErrMsg;
     }
 
@@ -97,7 +104,7 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
 
         if (mSD != null) {
 
-            if (mIsCreateTable) {
+            if (mTaskParams.IsCreateTable) {
 
                 if (aErrorMessage.isEmpty()) {
 
@@ -105,7 +112,7 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
                     String[] lDataArray = mSD.getData();
                     int lRecordCount = mSD.getRecordCount();
 
-                    CTableCreator lTC = new CTableCreator(mTableName, lColumnList, mPKIdName, null);
+                    CTableCreator lTC = new CTableCreator(mTaskParams.TableName, lColumnList, mTaskParams.PKIdName, null);
                     lTC.CreateTableFromColumnList();
                     if (lRecordCount > 0) {
                         lTC.AddRowFromValueListGroup(lDataArray);
@@ -113,8 +120,8 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
 
                 }
 
-                if (mOnTaskFinishListener != null)
-                    mOnTaskFinishListener.OnMakeTableFinish(aErrorMessage);
+                if (mTaskParams.onTaskFinishListener != null)
+                    mTaskParams.onTaskFinishListener.OnMakeTableFinish(aErrorMessage);
 
             } else {
 
@@ -151,20 +158,27 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
                     lJA.put(lJO);
                 }
 
-                if (mOnTaskFinishListener != null)
-                    mOnTaskFinishListener.OnRunCommandFinished(lJA, aErrorMessage);
+                if (mTaskParams.onTaskFinishListener != null)
+                    mTaskParams.onTaskFinishListener.OnRunQueryFinished(lJA, aErrorMessage);
 
             }
+        } else {
+
+            if (mTaskParams.onTaskFinishListener != null)
+                mTaskParams.onTaskFinishListener.OnRunCommandFinished(mResultData, aErrorMessage);
+
         }
     }
 
     public static class RunCommandTaskParams {
+        public boolean IsSQLCommand;
         public boolean IsCreateTable;
         public String TableName;
         public String PKIdName;
         public OnTaskFinishListener onTaskFinishListener;
 
         public RunCommandTaskParams() {
+            IsSQLCommand = true;
             IsCreateTable = false;
             TableName = "";
             PKIdName = "";
@@ -173,6 +187,7 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
     }
     public interface OnTaskFinishListener {
         void OnMakeTableFinish(String aErrorMessage);
-        void OnRunCommandFinished(JSONArray aResult, String aErrorMessage);
+        void OnRunQueryFinished(JSONArray aResult, String aErrorMessage);
+        void OnRunCommandFinished(String aResult, String aErrorMessage);
     }
 }

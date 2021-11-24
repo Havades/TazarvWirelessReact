@@ -7,22 +7,53 @@ import com.tazarv.wireless.utility.network.CRunCommandTask.RunCommandTaskParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class CommandExecutor {
+public class CCommandExecutor {
     private JSONObject mLastResult = null;
 
     private CRunCommandTask.OnTaskFinishListener mOnRunFinish = null;
     String mTableCommand = "", mTableName = "", mTablePKId = "";
 
-    public CommandExecutor() {}
-    public CommandExecutor(CRunCommandTask.OnTaskFinishListener aOnRunFinish) {
+    public CCommandExecutor() {}
+    public CCommandExecutor(CRunCommandTask.OnTaskFinishListener aOnRunFinish) {
         mOnRunFinish = aOnRunFinish;
     }
 
-    public JSONObject runCommand(String aCommand) {
+    public String runCommand(String aCommand) {
         return runCommand(aCommand, true);
     }
-    public JSONObject runCommand(String aCommand, boolean aIsWait) {
-        JSONObject lJO = new JSONObject();
+    public String runCommand(String aCommand, boolean aIsWait) {
+        String lResult = "";
+        try {
+            RunCommandTaskParams lParams = new RunCommandTaskParams();
+            lParams.onTaskFinishListener = mOnRunFinish;
+            lParams.IsSQLCommand = false;
+
+            CRunCommandTask lRCT = new CRunCommandTask(lParams);
+            lRCT.execute(aCommand);
+
+            if(aIsWait) {
+                while (lRCT.isTaskRunning() && !lRCT.isTaskFinished()) {
+                    String lK = "";
+                    Thread.sleep(100);
+                }
+
+                String lErr = lRCT.getErrorMessage();
+                if (lErr.isEmpty())
+                    lResult = lRCT.getResultData();
+                else
+                    throw new Exception(lErr);
+            }
+
+        } catch (Exception ex) {
+            lResult = String.format("Error: %s", ex.getMessage());
+        }
+        return lResult;
+    }
+    public JSONArray runQuery(String aCommand) {
+        return runQuery(aCommand, true);
+    }
+    public JSONArray runQuery(String aCommand, boolean aIsWait) {
+        JSONArray lJA = new JSONArray();
         try {
             RunCommandTaskParams lParams = new RunCommandTaskParams();
             lParams.onTaskFinishListener = mOnRunFinish;
@@ -42,50 +73,17 @@ public class CommandExecutor {
                     String[] lNames = lColList.split("\t", -1);
                     String[] lValues = lSD.getData();
 
-                    for (int i = 0; i < lNames.length; i++)
-                        lJO.put(lNames[i], lValues[i]);
-                }
-            }
-
-        } catch (Throwable tr) {
-            try {
-                lJO.put("Error", tr.getMessage());
-            } catch (Throwable tr1) {
-                lJO = null;
-            }
-        }
-        return lJO;
-    }
-    public JSONArray runQuery(String aCommand) {
-        JSONArray lJA = new JSONArray();
-        try {
-            RunCommandTaskParams lParams = new RunCommandTaskParams();
-            lParams.onTaskFinishListener = mOnRunFinish;
-
-            CRunCommandTask lRCT = new CRunCommandTask(lParams);
-            lRCT.execute(aCommand);
-
-            while (lRCT.isTaskRunning() && !lRCT.isTaskFinished()) {
-                String lK = "";
-                Thread.sleep(100);
-            }
-
-            CSocketData lSD = lRCT.getSocketDate();
-            if (lSD != null && lSD.getFieldCount() > 0) {
-                String lColList = lSD.getFieldList();
-                String[] lNames = lColList.split("\t", -1);
-                String[] lValues = lSD.getData();
-
-                int lVIdx = 0, lIndex = 0;
-                do {
-                    JSONObject lJO = new JSONObject();
-                    for (int i = 0; i < lNames.length; i++) {
-                        lJO.put(lNames[i], lValues[lVIdx]);
-                        lVIdx++;
+                    int lVIdx = 0, lIndex = 0;
+                    do {
+                        JSONObject lJO = new JSONObject();
+                        for (int i = 0; i < lNames.length; i++) {
+                            lJO.put(lNames[i], lValues[lVIdx]);
+                            lVIdx++;
+                        }
+                        lJA.put(lIndex++, lJO);
                     }
-                    lJA.put(lIndex++, lJO);
+                    while (lVIdx < lValues.length);
                 }
-                while (lVIdx <lValues.length);
             }
 
         } catch (Exception ex) {

@@ -19,9 +19,18 @@ const Test = (props) => {
           <Button title="Object Test" 
             onPress={() =>{ 
               //const data = DBDataModule.GetData("Tbl_User","UserId=6")
-              const data = 
-                AuthModule.Login({Username:'hashemi', Password:'poi'})
-              console.log("UserInfo: " , data)
+
+                /*
+                AuthModule.Login({Username:'hashemi', Password:'123', IsRemember:true},(error,data)=>{
+                  console.log(data,error);
+                });
+                */
+
+                AuthModule.CheckRemember((error,data)=>{
+                  console.log(data,error);
+                });
+
+              //console.log("Login Result: " , data)
              //  Alert.alert(model.Id + "-\n-" + model.IP + "-\n-" + model.Port + "-\n-" + model.IsConnected);
             }}/>
         </View>
