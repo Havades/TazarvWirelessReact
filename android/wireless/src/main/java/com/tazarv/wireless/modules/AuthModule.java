@@ -152,6 +152,7 @@ public class AuthModule extends ReactContextBaseJavaModule {
             if(lUserId>0) {
                 SharedPreferences.Editor lPrefEditor = lPrefs.edit();
                 lPrefEditor.remove("LastUserId");
+                lPrefEditor.remove("LastUserName");
                 lPrefEditor.apply();
             }
 
