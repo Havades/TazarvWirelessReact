@@ -3,7 +3,6 @@ package com.tazarv.wireless.modules;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.textclassifier.TextClassifierEvent;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +16,9 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.tazarv.taclibrary.Classes.CEncrypt;
 import com.tazarv.wireless.classes.CAppStatus;
-import com.tazarv.wireless.utility.network.CServiceCommander;
+import com.tazarv.wireless.utility.network.CServiceCommander.ServiceCommanderResult;
+
+import static com.tazarv.wireless.classes.CAppStatus.ServiceCommander;
 
 public class AuthModule extends ReactContextBaseJavaModule {
 
@@ -52,8 +53,7 @@ public class AuthModule extends ReactContextBaseJavaModule {
                 lWM.putInt("UserId", 0);
             } else {
 
-                CServiceCommander.ServiceCommanderResult lSCResult =
-                        CAppStatus.ServiceCommander.InitUser(lUserId);
+                ServiceCommanderResult lSCResult = ServiceCommander.InitUser(lUserId);
 
                 if(lSCResult.IsOK) {
                     lWM.putBoolean("IsLogin", true);
@@ -104,8 +104,7 @@ public class AuthModule extends ReactContextBaseJavaModule {
 
                     int lUserId = Integer.valueOf(lMap.getString("UserId"));
 
-                    CServiceCommander.ServiceCommanderResult lSCResult =
-                            CAppStatus.ServiceCommander.InitUser(lUserId);
+                    ServiceCommanderResult lSCResult = ServiceCommander.InitUser(lUserId);
 
                     if(lSCResult.IsOK) {
 
