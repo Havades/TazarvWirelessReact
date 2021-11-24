@@ -147,9 +147,9 @@ public class AuthModule extends ReactContextBaseJavaModule {
             CAppStatus.LoginUsername = "";
 
             SharedPreferences lPrefs = mContext.getSharedPreferences("wireless", Context.MODE_PRIVATE);
-            int lUserId = lPrefs.getInt("LastUserId",0);
+            int lUserId = lPrefs.getInt("LastUserId", 0);
 
-            if(lUserId>0) {
+            if (lUserId > 0) {
                 SharedPreferences.Editor lPrefEditor = lPrefs.edit();
                 lPrefEditor.remove("LastUserId");
                 lPrefEditor.remove("LastUserName");
