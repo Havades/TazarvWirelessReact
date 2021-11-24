@@ -57,14 +57,10 @@ public class CommandExecutor {
         return lJO;
     }
     public JSONArray runQuery(String aCommand) {
-        return runQuery(aCommand, false);
-    }
-    public JSONArray runQuery(String aCommand, boolean aIsFullCommand) {
         JSONArray lJA = new JSONArray();
         try {
             RunCommandTaskParams lParams = new RunCommandTaskParams();
             lParams.onTaskFinishListener = mOnRunFinish;
-            lParams.IsFullCommand = aIsFullCommand;
 
             CRunCommandTask lRCT = new CRunCommandTask(lParams);
             lRCT.execute(aCommand);
@@ -90,8 +86,8 @@ public class CommandExecutor {
                     lJA.put(lIndex++, lJO);
                 }
                 while (lVIdx <lValues.length);
-
             }
+
         } catch (Exception ex) {
             try {
                 JSONObject lJO = new JSONObject();
