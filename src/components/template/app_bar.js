@@ -7,7 +7,7 @@ import { abs } from 'react-native-reanimated';
 
 const AppBar = (props) => {
     return (
-    <Appbar.Header style={{backgroundColor : Colors.grey800}}>
+    <Appbar.Header style={{backgroundColor : Colors.black}}>
         {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
         <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
         <View style={styles.view}>
