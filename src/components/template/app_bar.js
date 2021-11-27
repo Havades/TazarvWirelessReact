@@ -7,7 +7,7 @@ import { abs } from 'react-native-reanimated';
 
 const AppBar = (props) => {
     return (
-    <Appbar.Header style={{backgroundColor : Colors.grey700}}>
+    <Appbar.Header style={{backgroundColor : Colors.grey800}}>
         {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
         <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
         <View style={styles.view}>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems : 'center',
         justifyContent : 'flex-end',
         alignContent : 'center' ,
-        flex : 1
+        flex : 1,
     },
     icoSearch : {
         position : 'absolute' ,

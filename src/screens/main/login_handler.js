@@ -1,16 +1,16 @@
-const onUserIdChange = (userId , navigation) => 
+const onUserIdChange = (userId , navigation , setIsWaiting) => 
 {
     console.log('--onUserIdChange--' , userId)
     switch(userId)
     {
         case 0 :
-            //Show Spinner
+            setIsWaiting(true)
             break;
         case -1 :
             navigation.navigate('Login');
             break;
         default :
-            //Hide Spinner
+            setIsWaiting(false)
             break;
     }
 }
