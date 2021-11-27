@@ -4,13 +4,13 @@ const onUserIdChange = (userId , navigation , setIsWaiting) =>
     switch(userId)
     {
         case 0 :
-            setIsWaiting(true)
+            // setIsWaiting(true)
             break;
         case -1 :
             navigation.navigate('Login');
             break;
         default :
-            setIsWaiting(false)
+            // setIsWaiting(false)
             break;
     }
 }
