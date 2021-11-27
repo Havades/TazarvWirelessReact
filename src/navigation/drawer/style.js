@@ -5,7 +5,6 @@ export default StyleSheet.create({
     view : {
         margin : 10,
         flexDirection : 'row-reverse',
-        backgroundColor : '#202829'
     },
     icon : {
       alignSelf: "center",

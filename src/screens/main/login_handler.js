@@ -1,6 +1,5 @@
 const onUserIdChange = (userId , navigation , setIsWaiting) => 
 {
-    console.log('--onUserIdChange--' , userId)
     switch(userId)
     {
         case 0 :
@@ -16,7 +15,6 @@ const onUserIdChange = (userId , navigation , setIsWaiting) =>
 }
 const loginCheck = (navigation ,route, AuthModule , setUserId) =>
 {
-    console.log(route)
     if(typeof route !== 'undefined'){
         // setUserId(route.params.userId)
         return;

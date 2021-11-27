@@ -1,7 +1,9 @@
 import React , {useState , useEffect , useCallback} from 'react'
 import { View, Text , BackHandler , TextInput, TouchableOpacity, Alert, Switch ,NativeModules } from 'react-native'
-import { useSelector} from 'react-redux'
 import styles from './style'
+import { useDispatch} from 'react-redux'
+import { bindActionCreators  } from 'redux'
+import * as actionCreator from './../../store/actions'
 import * as Handler from './login_handler'; 
 import { useFocusEffect } from '@react-navigation/native';
 import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/template'
@@ -9,9 +11,16 @@ import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/templ
 const {AuthModule} = NativeModules;
 
 const Login = (props) => {
+    const dispatch = useDispatch()
+    const {signIn , signOut} = bindActionCreators(actionCreator , dispatch)
+
     useFocusEffect(
         useCallback(() => {
-            const event = BackHandler.addEventListener("hardwareBackPress" , () => BackHandler.exitApp())
+            signOut()
+            const event = BackHandler.addEventListener("hardwareBackPress" , (e) => {
+                BackHandler.exitApp()
+                return true;
+            })
             return () => event.remove()
         } , []
       ));
@@ -20,7 +29,7 @@ const Login = (props) => {
     const [isWaiting, setIsWaiting] = useState(false);
     const onChangeHandle = (e , name) => setUserInfo({...userInfo , [name] : e})
     const toggleSwitch = () => setIsRemember(previousState => !previousState);
-    const onSubmit = (e) => Handler.onSubmit(AuthModule , userInfo , isRemember , props.navigation , Alert.alert)
+    const onSubmit = (e) => Handler.onSubmit(AuthModule , userInfo , isRemember , props.navigation, signIn , Alert.alert)
     return (
         <>
         <AppBar {...props } title='ورود' isShowSearch={false}/>

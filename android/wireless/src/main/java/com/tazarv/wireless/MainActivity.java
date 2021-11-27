@@ -1,4 +1,5 @@
 package com.tazarv.wireless;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 
@@ -11,5 +12,11 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "Tazarv";
+  }
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    getReactInstanceManager().onConfigurationChanged(this, newConfig);
   }
 }

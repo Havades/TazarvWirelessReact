@@ -3,13 +3,13 @@ import { Image , View , Text} from 'react-native'
 import { Login , Main , Message , Setting , Profile ,Test} from '../../screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator , DrawerContentScrollView ,DrawerItemList } from '@react-navigation/drawer';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { OrangeLine } from '../../components/atoms';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import styles from './style'
+import { useSelector} from 'react-redux'
 
 // const appName = "نرم افزار بی سیم تذرو"
 const routeNames = {
@@ -20,10 +20,10 @@ const routeNames = {
     Setting: "تنظیمات",
     Test : "تست"
 }
-
-const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
+  const {isLoggedIn , userId} = useSelector((state) => state.login)
+
     return (
         <NavigationContainer>
             <Drawer.Navigator initialRouteName="Main"
@@ -33,7 +33,8 @@ const DrawerNavigation = () => {
                 drawerStyle: styles.drawerStyle,
                 headerStyle : styles.headerStyle,
                 drawerLabelStyle : styles.drawerLabelStyle,
-                overlayColor: 'transparent'
+                overlayColor: 'transparent',
+                swipeEdgeWidth: isLoggedIn ? 20 : 0
               }}
                 drawerContent={(props) => <CustomDrawerContent {...props} />}
                 >

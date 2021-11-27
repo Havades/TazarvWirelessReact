@@ -7,11 +7,11 @@ export const signIn = (userId) =>{
     }
 }
 
-export const signOut = (userId) =>{
+export const signOut = () =>{
     return (dispatch) => {
         dispatch({
             type : "logout",
-            payload : userId
+            payload : null
         })
     }
 }

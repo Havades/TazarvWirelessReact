@@ -1,17 +1,18 @@
-const onSubmit = (AuthModule, userInfo ,isRemember , navigation , alert) => 
+const onSubmit = (AuthModule, userInfo ,isRemember , navigation , signIn, alert) => 
 {
-    console.log(navigation)
+    signIn(1)
+    return;
     const params = {
         Username : userInfo.username,
         Password : userInfo.password,
         IsRemember : isRemember
     }
     AuthModule.Login( params , (error , res) => {
-    console.log('--error--', error);
-    console.log('--result--', res.UserId);
     navigation.navigate('Main' , { userId : 50 })
     if(res.IsLogin)
+    {   signIn(res.UserId)
         navigation.navigate('Main' , { userId : res.UserId })
+    }
     else
         alert(error)
    })

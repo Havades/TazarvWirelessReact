@@ -1,6 +1,6 @@
 const initialState = {
-    isLoggedIn : false ,
-    userId : -1
+    isLoggedIn : true ,
+    userId : 1
 }
 const loginReducer = (state = initialState , action) => {
     switch(action.type){
