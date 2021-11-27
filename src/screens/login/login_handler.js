@@ -1,6 +1,7 @@
 const onSubmit = (AuthModule, userInfo ,isRemember , navigation , signIn, alert) => 
 {
     signIn(1)
+    navigation.navigate('Main' , { userId : 50 });
     return;
     const params = {
         Username : userInfo.username,

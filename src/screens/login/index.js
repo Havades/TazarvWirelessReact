@@ -1,4 +1,4 @@
-import React , {useState , useEffect , useCallback} from 'react'
+import React , {useState , useCallback} from 'react'
 import { View, Text , BackHandler , TextInput, TouchableOpacity, Alert, Switch ,NativeModules } from 'react-native'
 import styles from './style'
 import { useDispatch} from 'react-redux'
