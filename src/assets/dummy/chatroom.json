@@ -1,0 +1,28 @@
+{
+    "channels" : [
+        {"id" : 1001 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true} ,
+        {"id" : 1002 ,"name" : "امور شرق اراک" , "caption" : "ممد میرزایی" , "silent" : true} ,
+        {"id" : 1003 ,"name" : "ولیعصر" , "caption" : "علی مرادی" , "silent" : false} ,
+        {"id" : 1004 ,"name" : "باکری" , "caption" : "" , "silent" : true} ,
+        {"id" : 1005 ,"name" : "دیسپاچینگ" , "caption" : "امید دادور" , "silent" : true} ,
+        {"id" : 1006 ,"name" : "خوی" , "caption" : "امیر حسین هاشمی" , "silent" : false} ,
+        {"id" : 1007 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true} ,
+        {"id" : 1008 ,"name" : "مراغه" , "caption" : "امید دادور" , "silent" : false} ,
+        {"id" : 1009 ,"name" : "باکری" , "caption" : "" , "silent" : true} ,
+        {"id" : 1010 ,"name" : "ممد تپه سفلی" , "caption" : "" , "silent" : false}
+    ],
+    "activeusers" : [
+        {"id" : 2001 ,"name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false},
+        {"id" : 2003 ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true},
+        {"id" : 2004 ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false}
+    ],
+    "users" : [
+        {"id" : 2001 ,"name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false},
+        {"id" : 2002 ,"name" : "بت من" , "caption" : "امید دادور" , "silent" : false},
+        {"id" : 2003 ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true},
+        {"id" : 2004 ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false},
+        {"id" : 2005 ,"name" : "علی رضایی" , "caption" : "" , "silent" : true},
+        {"id" : 2006 ,"name" : "بهاره ممدزاده" , "caption" : "کمال بهاری" , "silent" : false},
+        {"id" : 2007 ,"name" : "بیتا اردبیلی" , "caption" : "" , "silent" : false}
+    ]
+}

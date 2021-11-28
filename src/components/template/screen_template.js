@@ -1,11 +1,12 @@
 import React from 'react'
 import { SafeAreaView, ScrollView ,StyleSheet} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import { Colors } from 'react-native-paper'
 
 const ScreenTemplate = (props) => {
     return (
         <SafeAreaView style={styles.safeArea}>
-            <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
+            <LinearGradient colors={[Colors.black, Colors.grey700]} style={styles.linearGradient}>
                 {props.children}
             </LinearGradient>
         </SafeAreaView>
