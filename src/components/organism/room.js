@@ -2,6 +2,8 @@ import React , {useState , useEffect} from 'react'
 import { View, Text, StyleSheet , Alert , TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from 'react-native-paper';
+import Snackbar from 'react-native-snackbar';
+
 const Room = (props) => {
     const [isRecording, setIsRecording] = useState(false)
     const [isMute, setIsMute] = useState(false)
@@ -28,7 +30,15 @@ const Room = (props) => {
                 </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.8} style={styles.SpeakerIcon} 
-                onPress={() => setIsMute(prev => !prev)}>
+                onPress={() => {
+                    const withTxt = isMute ? 'با' : 'بی';
+                    Snackbar.show({
+                        text: 'اتاق گفتگوی ' + props.name + ' به حالت '+ withTxt +' صدا درآمد.',
+                        duration: Snackbar.LENGTH_LONG,
+                        rtl	: true,
+                    });
+                    setIsMute(prev => !prev)
+                    }}>
                 <MaterialCommunityIcons name={isMute ? "volume-off": "volume-high"} size={50} 
                     color={isMute ? Colors.red400 :Colors.green400} />
             </TouchableOpacity>
