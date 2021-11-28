@@ -7,10 +7,12 @@ import { FlatList } from 'react-native'
 const Users = () => {
     const [rooms, setRooms] = useState([])
     useEffect(() => {
-        setRooms(data.users)
+        const list = data.users.sort((a,b) => (a.isOnline === b.isOnline) ? 0 : (a.isOnline) ? -1 : 1)
+        setRooms(list)
     }, [])
     const renderItem = ({item ,index, separators }) => (
-        <Room caption={item.caption} name={item.name} isSilent={item.silent}/>
+        <Room caption={item.caption} name={item.name} isSilent={item.silent} 
+            type={"user"} online={item.isOnline} messageCount={item.msgCount}/>
     );
     return (
         <ScreenTemplate>

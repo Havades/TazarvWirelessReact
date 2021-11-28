@@ -10,7 +10,8 @@ const ActiveUsers = () => {
         setRooms(data.activeusers)
     }, [])
     const renderItem = ({item ,index, separators }) => (
-        <Room caption={item.caption} name={item.name} isSilent={item.silent}/>
+        <Room caption={item.caption} name={item.name} isSilent={item.silent}
+            type={"activeuser"} messageCount={item.msgCount}/>
     );
     return (
         <ScreenTemplate>

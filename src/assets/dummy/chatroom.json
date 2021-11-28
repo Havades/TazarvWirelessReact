@@ -1,28 +1,28 @@
 {
     "channels" : [
-        {"id" : 1001 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true} ,
-        {"id" : 1002 ,"name" : "امور شرق اراک" , "caption" : "ممد میرزایی" , "silent" : true} ,
-        {"id" : 1003 ,"name" : "ولیعصر" , "caption" : "علی مرادی" , "silent" : false} ,
-        {"id" : 1004 ,"name" : "باکری" , "caption" : "" , "silent" : true} ,
-        {"id" : 1005 ,"name" : "دیسپاچینگ" , "caption" : "امید دادور" , "silent" : true} ,
-        {"id" : 1006 ,"name" : "خوی" , "caption" : "امیر حسین هاشمی" , "silent" : false} ,
-        {"id" : 1007 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true} ,
-        {"id" : 1008 ,"name" : "مراغه" , "caption" : "امید دادور" , "silent" : false} ,
-        {"id" : 1009 ,"name" : "باکری" , "caption" : "" , "silent" : true} ,
-        {"id" : 1010 ,"name" : "ممد تپه سفلی" , "caption" : "" , "silent" : false}
+        {"id" : 1001 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true , "msgCount" : 10} ,
+        {"id" : 1002 ,"name" : "امور شرق اراک" , "caption" : "ممد میرزایی" , "silent" : true, "msgCount" : 45} ,
+        {"id" : 1003 ,"name" : "ولیعصر" , "caption" : "علی مرادی" , "silent" : false, "msgCount" : 87} ,
+        {"id" : 1004 ,"name" : "باکری" , "caption" : "" , "silent" : true, "msgCount" : 565} ,
+        {"id" : 1005 ,"name" : "دیسپاچینگ" , "caption" : "امید دادور" , "silent" : true, "msgCount" : 44} ,
+        {"id" : 1006 ,"name" : "خوی" , "caption" : "امیر حسین هاشمی" , "silent" : false, "msgCount" : 89} ,
+        {"id" : 1007 ,"name" : "باکری" , "caption" : "علی مرادی" , "silent" : true, "msgCount" : 33} ,
+        {"id" : 1008 ,"name" : "مراغه" , "caption" : "امید دادور" , "silent" : false, "msgCount" : 4} ,
+        {"id" : 1009 ,"name" : "باکری" , "caption" : "" , "silent" : true, "msgCount" : 5} ,
+        {"id" : 1010 ,"name" : "ممد تپه سفلی" , "caption" : "" , "silent" : false, "msgCount" : 135}
     ],
     "activeusers" : [
-        {"id" : 2001 ,"name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false},
-        {"id" : 2003 ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true},
-        {"id" : 2004 ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false}
+        {"id" : 2001 ,"name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false, "msgCount" : 26},
+        {"id" : 2003 ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true, "msgCount" : 36},
+        {"id" : 2004 ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false, "msgCount" : 100}
     ],
     "users" : [
-        {"id" : 2001 ,"name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false},
-        {"id" : 2002 ,"name" : "بت من" , "caption" : "امید دادور" , "silent" : false},
-        {"id" : 2003 ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true},
-        {"id" : 2004 ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false},
-        {"id" : 2005 ,"name" : "علی رضایی" , "caption" : "" , "silent" : true},
-        {"id" : 2006 ,"name" : "بهاره ممدزاده" , "caption" : "کمال بهاری" , "silent" : false},
-        {"id" : 2007 ,"name" : "بیتا اردبیلی" , "caption" : "" , "silent" : false}
+        {"id" : 2001 , "isOnline" : true , "name" : "سینا کمبوجیه" , "caption" : "" , "silent" : false, "msgCount" : 135},
+        {"id" : 2002 ,"isOnline" : false ,"name" : "بت من" , "caption" : "امید دادور" , "silent" : false, "msgCount" : 98},
+        {"id" : 2003 ,"isOnline" : true ,"name" : "سوپر من" , "caption" : "زری" , "silent" : true, "msgCount" : 265},
+        {"id" : 2004 ,"isOnline" : true ,"name" : "spider man" , "caption" : "کمال کمالوند" , "silent" : false, "msgCount" : 88},
+        {"id" : 2005 ,"isOnline" : false ,"name" : "علی رضایی" , "caption" : "" , "silent" : true, "msgCount" : 54},
+        {"id" : 2006 ,"isOnline" : false ,"name" : "بهاره ممدزاده" , "caption" : "کمال بهاری" , "silent" : false, "msgCount" : 5},
+        {"id" : 2007 ,"isOnline" : false ,"name" : "بیتا اردبیلی" , "caption" : "" , "silent" : false, "msgCount" : 21}
     ]
 }

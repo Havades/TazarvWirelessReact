@@ -2,6 +2,7 @@ import React from 'react'
 import { View , StyleSheet , Image, Text, ScrollView} from 'react-native'
 import { Center } from './../molecule'
 import { OrangeLine } from './../atoms'
+import { Colors } from 'react-native-paper'
 const LoginOrganism = (props) => {
     return (
         <View style={styles.view}>
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         // flex : 1,
         flexDirection : 'column',
         width : '100%',
-        backgroundColor : 'grey',
+        backgroundColor : Colors.grey700,
         borderRadius : 20,
         borderWidth : 1,
         borderColor : 'black',

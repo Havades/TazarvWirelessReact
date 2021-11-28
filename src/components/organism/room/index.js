@@ -3,6 +3,7 @@ import { View, Text, StyleSheet , Alert , TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from 'react-native-paper';
 import Snackbar from 'react-native-snackbar';
+import styles from './style'
 
 const Room = (props) => {
     const [isRecording, setIsRecording] = useState(false)
@@ -12,10 +13,16 @@ const Room = (props) => {
     }, [])
     return (
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.8} onPressIn={()=> setIsRecording(true)} onPressOut={()=> setIsRecording(false)}>
+            { props.type === 'user' ?
+            <View style={styles.wifiIcon}>
+                <MaterialCommunityIcons name={props.online ? 'wifi' : 'wifi-off'} size={40} 
+                    color={props.online ? Colors.blue400 : Colors.grey100}/>
+            </View>
+            : <TouchableOpacity activeOpacity={0.8} onPressIn={()=> setIsRecording(true)} onPressOut={()=> setIsRecording(false)}>
                 <MaterialCommunityIcons name="microphone" style={styles.micIcon} size={70} 
                     color={isRecording ? Colors.red500 : Colors.orange400}/>
             </TouchableOpacity>
+            }
             <TouchableOpacity style={{flex : 1}} activeOpacity={0.8} onPress={()=>Alert.alert("Icon" , "Should Navigate :D")}>
                 <View style={styles.textContainer} onPress={()=>Alert.alert("Icon" , "You clicked on speaker icon !!!")}>
                     <Text style={[styles.text , styles.topText]} ellipsizeMode={'tail'} numberOfLines={1}>
@@ -29,6 +36,10 @@ const Room = (props) => {
                     </View>
                 </View>
             </TouchableOpacity>
+            <View style={styles.countContainer}>
+                <Text style={styles.txtCount}> {props.messageCount > 99 ? '+99' : props.messageCount} </Text>
+            </View>
+            { props.type === 'channel' ?
             <TouchableOpacity activeOpacity={0.8} style={styles.SpeakerIcon} 
                 onPress={() => {
                     const withTxt = isMute ? 'با' : 'بی';
@@ -36,58 +47,17 @@ const Room = (props) => {
                         text: 'اتاق گفتگوی ' + props.name + ' به حالت '+ withTxt +' صدا درآمد.',
                         duration: Snackbar.LENGTH_LONG,
                         rtl	: true,
+                        textColor : Colors.orange200,
+                        backgroundColor : Colors.black
                     });
                     setIsMute(prev => !prev)
                     }}>
-                <MaterialCommunityIcons name={isMute ? "volume-off": "volume-high"} size={50} 
+            <MaterialCommunityIcons name={isMute ? "volume-off": "volume-high"} size={40} 
                     color={isMute ? Colors.red400 :Colors.green400} />
             </TouchableOpacity>
+            : <View style={styles.space}/>
+            }
         </View>
     )
 }
-const styles = StyleSheet.create({
-    container : {
-        marginTop : 10,
-        flexDirection : 'row-reverse',
-        height : 70,
-        paddingBottom : 5,
-        borderColor : 'grey',
-        borderWidth : 1,
-        borderRadius : 20
-    },
-    textContainer: {
-        flex : 1,
-        flexDirection : 'column'
-    },
-    captionContainer : {
-        flexDirection : 'row'
-    },
-    text : {
-        color : 'white'
-    },
-    topText : {
-        fontSize : 25,
-        flex : 2,
-    },
-    SpeakerIcon : {
-        width : 70,
-        height : 70,
-        alignItems : 'center',
-        justifyContent : 'center'
-    },
-    micIcon: {
-        width : 70
-    },
-    bottonText : {
-        fontSize : 15,
-        flex : 1,
-        textAlign : 'left',
-        textAlignVertical : 'center'
-    },
-    stopwatch : {
-        color : Colors.red200,
-        width : 70,
-        textAlign : 'right',
-    }
-})
 export default Room
