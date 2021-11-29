@@ -47,8 +47,8 @@ const Room = (props) => {
                         text: 'اتاق گفتگوی ' + props.name + ' به حالت '+ withTxt +' صدا درآمد.',
                         duration: Snackbar.LENGTH_LONG,
                         rtl	: true,
-                        textColor : Colors.orange200,
-                        backgroundColor : Colors.black
+                        textColor : Colors.black,
+                        backgroundColor : Colors.orange200
                     });
                     setIsMute(prev => !prev)
                     }}>
