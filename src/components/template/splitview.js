@@ -4,8 +4,8 @@ import {useSelector} from 'react-redux'
 
 const styles = StyleSheet.create({
   root: {flex: 1, flexDirection: 'row-reverse'},
-  masterView: {flex: 1},
-  detailView: { flex: 1.5},
+  masterView: {flex: 2},
+  detailView: { flex: 3},
 });
 
 const SplitView = ({children}) => {

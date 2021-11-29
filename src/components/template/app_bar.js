@@ -6,24 +6,30 @@ import LinearGradient from 'react-native-linear-gradient'
 import { useSelector} from 'react-redux'
 
 const AppBar = (props) => {
-        
     const {isLoggedIn , userId} = useSelector((state) => state.login)
     return (
     <Appbar.Header style={{backgroundColor : Colors.black}}>
         {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
         <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
         <View style={styles.view}>
-            {props.isShowSearch ? <IconButton
-                style={styles.icoSearch}
-                icon="magnify"
-                color={Colors.orange300}
-                size={30}
-                onPress={() => console.log("Search Pressed :D")}
-                /> : null}
+        {props.leftActions.map((item, index) => (
+                <IconButton 
+                    key={index}
+                    style={{
+                        position : 'absolute' ,
+                        justifyContent : 'center' , 
+                        left : index * 30 + 1
+                    }}
+                    icon={item.icon.name} 
+                    color={item.icon.color} 
+                    size={30} 
+                    onPress={() => item.action}
+                />
+            ))}
             <Text style={isLoggedIn ? styles.title : [styles.title , {marginRight : 50}] }>
                 {props.title}
             </Text>
-            { !isLoggedIn ? null : <IconButton
+            { !isLoggedIn || !props.isNavigable ? null : <IconButton
                 icon="menu"
                 color="white"
                 size={40}

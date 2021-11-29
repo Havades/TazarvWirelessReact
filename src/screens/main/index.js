@@ -7,7 +7,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { Waiting} from './../../components/organism'
 import {TabNavigation} from './../../navigation'
 import {SplitView} from './../../components/template'
-import {Message , Setting} from './../../screens'
+import {Message} from './../../screens'
 const { AuthModule } = NativeModules;
 
 const Main = (props) => {
