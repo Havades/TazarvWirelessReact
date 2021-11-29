@@ -2,9 +2,8 @@ package com.tazarv.wireless.utility.network;
 
 import org.json.JSONObject;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
+
 
 public class CDataAnalyzer {
     private String mData = "";
@@ -42,14 +41,14 @@ public class CDataAnalyzer {
             mErrorList.add(ex.getMessage());
         }
     }
-    private void CheckStatus() {
+    private void CheckAudio() {
         try {
 
         } catch (Exception ex) {
             mErrorList.add(ex.getMessage());
         }
     }
-    private void CheckStatus() {
+    private void Check() {
         try {
 
         } catch (Exception ex) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert, Button, NativeModules, Text, View, StyleSheet } from 'react-native';
 import { AppBar} from './../../components/template'
-const {TCPModule, DBDataModule, AuthModule} = NativeModules;
+const {TCPModule, DBDataModule, AuthModule, PlayerModule} = NativeModules;
 
 const Test = (props) => {
     return (
@@ -20,15 +20,19 @@ const Test = (props) => {
             onPress={() =>{ 
               //const data = DBDataModule.GetData("Tbl_User","UserId=6")
 
+              PlayerModule.PlaySound();
+
                 /*
                 AuthModule.Login({Username:'hashemi', Password:'123', IsRemember:true},(error,data)=>{
                   console.log(data,error);
                 });
                 */
 
+                /*
                 AuthModule.CheckRemember((error,data)=>{
                   console.log(data,error);
                 });
+                */
 
               //console.log("Login Result: " , data)
              //  Alert.alert(model.Id + "-\n-" + model.IP + "-\n-" + model.Port + "-\n-" + model.IsConnected);

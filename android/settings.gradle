@@ -9,3 +9,6 @@ project(':taclibrary').projectDir = new File(settingsDir, '../../TZAndroid/tacli
 
 include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+
+include ':javax'
+project(':javax').projectDir = new File(settingsDir, './javax')
