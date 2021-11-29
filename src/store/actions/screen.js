@@ -1,7 +1,7 @@
-export const orientationChange = (screenInfo) =>{
+export const screenSizeChange = (screenInfo) =>{
     return (dispatch) => {
         dispatch({
-            type : "orientation",
+            type : "screenSize",
             payload : screenInfo
         })
     }

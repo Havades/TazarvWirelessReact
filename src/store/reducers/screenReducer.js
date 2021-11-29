@@ -1,17 +1,18 @@
-import { Dimensions } from "react-native"
-
 const initialState = {
     width : 0,
     height : 0 ,
-    isPortrait : true
+    isTablet : false,
+    isLandscape : false
 }
 const screenReducer = (state = initialState , action) => {
+    const data = action.payload;
     switch(action.type){
-        case "orientation" :
+        case "screenSize" :
             return {...state ,
-                width : action.payload.width ,
-                height : action.payload.height ,
-                isPortrait : action.payload.isPortrait
+                width : data.width ,
+                height : data.height ,
+                isTablet : data.isTablet,
+                isLandscape : data.isLandscape
             }
         default:
             return state;

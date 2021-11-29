@@ -6,6 +6,8 @@ import * as Login from './login_handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Waiting} from './../../components/organism'
 import {TabNavigation} from './../../navigation'
+import {SplitView} from './../../components/template'
+import {Message , Setting} from './../../screens'
 const { AuthModule } = NativeModules;
 
 const Main = (props) => {
@@ -28,7 +30,10 @@ const Main = (props) => {
           customIndicator={<Waiting/>}
         />
         <AppBar {...props } title='سامانه بی سیم' isShowSearch={false}/>
-        <TabNavigation/>
+        <SplitView>
+          <TabNavigation/>
+          <Message/>
+        </SplitView>
     </>
     )
 }
