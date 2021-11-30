@@ -22,19 +22,20 @@ public class AudioConverter {
     public static void PlayGSMSound(Context aContext) {
         PlaySoundFromAsset(aContext, "gsm610_8000.wav");
     }
+
     public static void PlaySoundFromAsset(Context mContext, String aSoundName) {
         MediaPlayer lPlayer = null;
         try {
             //AssetFileDescriptor lAFD = mContext.getAssets().openFd("sounds/" + aSoundName  + "");
-            InputStream lIn = mContext.getAssets().open("sounds/" + aSoundName  + "");
+            InputStream lIn = mContext.getAssets().open("sounds/" + aSoundName + "");
 
             byte[] lData = new byte[lIn.available()];
-            lIn.read(lData,0,lIn.available());
+            lIn.read(lData, 0, lIn.available());
 
-            byte[] lDataOut = new byte[lData.length*2];
+            byte[] lDataOut = new byte[lData.length * 10];
 
             GSMDecoder lGSMDecoder = new GSMDecoder();
-            lGSMDecoder.decode(lData, 44, lDataOut,0, true);
+            lGSMDecoder.decode(lData, 44, lDataOut, 0, false);
 
             File tempMp3 = File.createTempFile("tac", "wav", mContext.getCacheDir());
             tempMp3.deleteOnExit();

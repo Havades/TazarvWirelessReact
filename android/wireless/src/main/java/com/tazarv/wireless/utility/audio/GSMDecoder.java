@@ -1,6 +1,10 @@
 package com.tazarv.wireless.utility.audio;
 
+import android.util.Log;
+
 import com.tazarv.javax.sound.sampled.tritonus.*;
+
+import java.lang.reflect.Array;
 
 public final class GSMDecoder
 {
@@ -25,10 +29,6 @@ public final class GSMDecoder
     private int	nrp;
     private int[]	v = new int[9];
     private int	msr;
-
-
-    // hack used for adapting calling conventions
-    private byte[]	m_abFrame;
 
     // only to reduce memory allocations
     // (formerly allocated once for each frame to decode)
@@ -74,18 +74,32 @@ public final class GSMDecoder
      */
     public void decode(byte[] abFrame, int nFrameStart,
                        byte[] abBuffer, int nBufferStart, boolean bBigEndian)
-            throws InvalidGSMFrameException
-    {
-        if (m_abFrame == null)
-        {
-            m_abFrame = new byte[33];
-        }
-        System.arraycopy(abFrame, nFrameStart, m_abFrame, 0, 33);
-        int[]	anDecodedData = decode(m_abFrame);
-        for (int i = 0; i < 160; i++)
-        {
-            TConversionTool.intToBytes16(anDecodedData[i], abBuffer, i * 2 + nBufferStart, bBigEndian);
-        }
+            throws InvalidGSMFrameException {
+        int lBufferIndex = nBufferStart, lFrameIndex = nFrameStart;
+        int lNoneByte = 0;
+
+        do {
+
+            try {
+
+                byte[] l_abFrame = new byte[33];
+                System.arraycopy(abFrame, lFrameIndex, l_abFrame, 0, 33 - lNoneByte);
+                int[] anDecodedData = decode(l_abFrame);
+                for (int i = 0; i < 160; i++) {
+                    TConversionTool.intToBytes16(anDecodedData[i], abBuffer, i * 2 + lBufferIndex, bBigEndian);
+                }
+
+            } catch (Exception ex) {
+                Log.e("GSMDecoder", "decode: " + ex.getMessage() );
+            }
+
+            lBufferIndex += 160 * 2;
+            lFrameIndex += 33;
+            lNoneByte = (lNoneByte == 0 ? 1 : 0);
+
+        } while ((abFrame.length - lFrameIndex) > 33);
+
+        String s = "";
     }
 
 
@@ -100,10 +114,12 @@ public final class GSMDecoder
 
         int i=0;
 
+        /*
         if (((c[i]>>4) & 0xf) != GSM_MAGIC)
         {
             throw new InvalidGSMFrameException();
         }
+        */
 
         m_LARc[0]  = ((c[i++] & 0xF) << 2);           /* 1 */
         m_LARc[0] |= ((c[i] >> 6) & 0x3);
