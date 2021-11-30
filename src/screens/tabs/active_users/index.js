@@ -4,13 +4,13 @@ import styles from './style'
 import {ScreenTemplate} from './../../../components/template'
 import data from './../../../assets/dummy/chatroom.json'
 import { FlatList, View } from 'react-native'
-const ActiveUsers = () => {
+const ActiveUsers = (props) => {
     const [rooms, setRooms] = useState([])
     useEffect(() => {
         setRooms(data.activeusers)
     }, [])
     const renderItem = ({item ,index, separators }) => (
-        <Room caption={item.caption} name={item.name} isSilent={item.silent}
+        <Room caption={item.caption} name={item.name} isSilent={item.silent} nav={props.upperNav}
             type={"activeuser"} messageCount={item.msgCount}/>
     );
     return (

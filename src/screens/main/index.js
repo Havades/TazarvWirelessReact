@@ -13,10 +13,10 @@ const { AuthModule } = NativeModules;
 const Main = (props) => {
   const [userId , setUserId] = useState(0)
   const [isWaiting , setIsWaiting] = useState(false)
-  useEffect(() => { Login.onUserIdChange(userId , props.navigation , setIsWaiting) }, [userId])
+  useEffect(() => { Login.onUserIdChange(userId , props.propUpper.navigation , setIsWaiting) }, [userId])
   useFocusEffect(
     useCallback(
-      () => Login.loginCheck(props.navigation , props.route, AuthModule , setUserId)
+      () => Login.loginCheck(props.propUpper.navigation , props.propUpper.route, AuthModule , setUserId)
       , [],
     )
   )
@@ -29,9 +29,9 @@ const Main = (props) => {
           cancelable={true}
           customIndicator={<Waiting/>}
         />
-        <AppBar {...props } title='سامانه بی سیم' isShowSearch={false}/>
+        <AppBar {...props.propUpper } title='سامانه بی سیم' isShowSearch={false}/>
         <SplitView>
-          <TabNavigation/>
+          <TabNavigation {...props.propUpper}/>
           <Message/>
         </SplitView>
     </>

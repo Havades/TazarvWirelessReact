@@ -4,10 +4,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Colors } from 'react-native-paper';
 import Snackbar from 'react-native-snackbar';
 import styles from './style'
+import { useSelector} from 'react-redux'
 
 const Room = (props) => {
     const [isRecording, setIsRecording] = useState(false)
     const [isMute, setIsMute] = useState(false)
+    const {isTablet , isLandscape} = useSelector((state) => state.screen)
     useEffect(() => {
         setIsMute(props.isSilent)
     }, [])
@@ -23,8 +25,11 @@ const Room = (props) => {
                     color={isRecording ? Colors.red500 : Colors.orange400}/>
             </TouchableOpacity>
             }
-            <TouchableOpacity style={{flex : 1}} activeOpacity={0.8} onPress={()=>Alert.alert("Icon" , "Should Navigate :D")}>
-                <View style={styles.textContainer} onPress={()=>Alert.alert("Icon" , "You clicked on speaker icon !!!")}>
+            <TouchableOpacity style={{flex : 1}} activeOpacity={0.8} onPress={()=>{
+                if(!isLandscape || !isTablet)
+                    props.nav.navigation.navigate('Messages')
+            }}>
+                <View style={styles.textContainer}>
                     <Text style={[styles.text , styles.topText]} ellipsizeMode={'tail'} numberOfLines={1}>
                     {props.name} </Text>
                     <View style={styles.captionContainer}>

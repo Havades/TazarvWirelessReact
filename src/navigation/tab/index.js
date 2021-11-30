@@ -6,7 +6,7 @@ import {NavigationContainer} from '@react-navigation/native'
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabNavigation = () => {
+const TabNavigation = (props) => {
     return (
         <NavigationContainer independent={true}>
           <Tab.Navigator tabBarOptions={{
@@ -25,13 +25,13 @@ const TabNavigation = () => {
           ,}}
             initialRouteName={"Channels"}
             >
-              <Tab.Screen name={"Users"} component={Users} options={{ tabBarLabel: 'کاربران',
+              <Tab.Screen name={"Users"} children={() => <Users upperNav={props}/>} options={{ tabBarLabel: 'کاربران',
                   tabBarIcon:({focused})=><MaterialCommunityIcons name="account-group" size={25} color={focused ? "orange":"white"}/>
               }}/>
-              <Tab.Screen name={"Channels"} component={Channels} options={{ tabBarLabel: 'کانال ها',
+              <Tab.Screen name={"Channels"} children={() => <Channels upperNav={props}/>} options={{ tabBarLabel: 'کانال ها',
                   tabBarIcon:({focused})=><MaterialCommunityIcons name="satellite-uplink" size={25} color={focused ? "orange":"white"}/>
               }}/>
-              <Tab.Screen name={"ActiveUsers"} component={ActiveUsers} options={{ tabBarLabel: 'کاربران آنلاین',
+              <Tab.Screen name={"ActiveUsers"} children={() => <ActiveUsers upperNav={props}/>} options={{ tabBarLabel: 'کاربران آنلاین',
                   tabBarIcon:({focused})=><MaterialCommunityIcons name="wifi" size={25} color={focused ? "orange":"white"}/>
                 }}/>
           </Tab.Navigator>

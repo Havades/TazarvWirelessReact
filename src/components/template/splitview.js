@@ -19,7 +19,7 @@ const SplitView = ({children}) => {
   return (
   <View style={styles.root}>
     <View style={styles.masterView}>{children[0]}</View>
-    { screen.isLandscape ? 
+    { screen.isLandscape && screen.isTablet ? 
       <>
       <View style={styles.seperator}/>
       <View style={styles.detailView}>{children[1]}</View>

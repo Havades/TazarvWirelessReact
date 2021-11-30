@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import styles from './style'
 import { useSelector} from 'react-redux'
+import MessageNavigator from '../message';
 
 // const appName = "نرم افزار بی سیم تذرو"
 const routeNames = {
@@ -38,7 +39,7 @@ const DrawerNavigation = () => {
               }}
                 drawerContent={(props) => <CustomDrawerContent {...props} />}
                 >
-                <Drawer.Screen name="Main" component={Main} options={{ 
+                <Drawer.Screen name="Main" component={MessageNavigator} options={{
                   title: routeNames.Main,
                   drawerIcon: ({focused}) => <MaterialIcons name="home" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
                 }}/>
@@ -46,10 +47,10 @@ const DrawerNavigation = () => {
                   title: routeNames.Profile,
                   drawerIcon: ({focused}) => <MaterialCommunityIcons name="account-settings" style={styles.icon} size={30} color={focused? "orange":"white"}/>
                   }}/>
-                <Drawer.Screen name="Message" component={Message} options={{ 
+                {/* <Drawer.Screen name="Message" component={Message} options={{ 
                   title: routeNames.Message,
                   drawerIcon: ({focused}) => <MaterialCommunityIcons name="android-messages" style={styles.icon} size={30} color={focused ? "orange":"white"}/>
-                  }}/>
+                  }}/> */}
                 <Drawer.Screen name="Setting" component={Setting} options={{ 
                   title: routeNames.Setting,
                   drawerIcon: ({focused}) => <MaterialIcons name="settings" style={styles.icon} size={30} color={focused ? "orange":"white"}/>

@@ -6,14 +6,14 @@ import { FlatList , StyleSheet , View } from 'react-native'
 import styles from './style'
 
 
-const Users = () => {
+const Users = (props) => {
     const [rooms, setRooms] = useState([])
     useEffect(() => {
         const list = data.users.sort((a,b) => (a.isOnline === b.isOnline) ? 0 : (a.isOnline) ? -1 : 1)
         setRooms(list)
     }, [])
     const renderItem = ({item ,index, separators }) => (
-        <Room caption={item.caption} name={item.name} isSilent={item.silent} 
+        <Room caption={item.caption} name={item.name} isSilent={item.silent} nav={props.upperNav} 
             type={"user"} online={item.isOnline} messageCount={item.msgCount}/>
     );
     return (
