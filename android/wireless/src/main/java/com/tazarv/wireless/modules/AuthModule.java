@@ -16,6 +16,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.tazarv.taclibrary.Classes.CEncrypt;
 import com.tazarv.wireless.classes.CAppStatus;
+import com.tazarv.wireless.utility.network.CDataManager;
 import com.tazarv.wireless.utility.network.CServiceCommander.ServiceCommanderResult;
 
 import static com.tazarv.wireless.classes.CAppStatus.ServiceCommander;
@@ -121,6 +122,9 @@ public class AuthModule extends ReactContextBaseJavaModule {
                             lPrefEditor.putString("LastUserName", lUsername);
                             lPrefEditor.apply();
                         }
+
+                        CAppStatus.DataManager = new CDataManager();
+                        CAppStatus.DataManager.Start();
 
                     } else
                         throw new Exception(lSCResult.ErrorMessage);

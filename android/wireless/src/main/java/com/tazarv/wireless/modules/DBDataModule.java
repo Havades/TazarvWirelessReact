@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.tazarv.wireless.classes.CAppStatus;
 import com.tazarv.wireless.utility.network.CCommandExecutor;
 
 import org.json.JSONArray;
@@ -41,7 +42,7 @@ public class DBDataModule extends ReactContextBaseJavaModule {
                     lWhere
             );
 
-            CCommandExecutor lCE = new CCommandExecutor();
+            CCommandExecutor lCE = new CCommandExecutor(CAppStatus.NetworkManager.getMainTCP());
             JSONArray lJA = lCE.runQuery(lSQL);
             lWA = ToJsMapList(lJA);
         } catch (Exception ex) {

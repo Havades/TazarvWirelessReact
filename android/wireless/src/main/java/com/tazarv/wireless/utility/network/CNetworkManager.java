@@ -76,10 +76,15 @@ public class CNetworkManager {
 
                     if(mainTCP.isConnected()) {
                         mIsInitialized = true;
+
                         if (onInitialaized != null)
-                            onInitialaized.OnInitialized();
-                    } else
+                            onInitialaized.OnInitialized(true);
+                    } else {
                         Toast.makeText(mContext, mainTCP.getErrorMessage(), Toast.LENGTH_SHORT).show();
+
+                        if (onInitialaized != null)
+                            onInitialaized.OnInitialized(false);
+                    }
 
                 } else {
                     Toast.makeText(mContext, ipMessage, Toast.LENGTH_SHORT).show();
@@ -92,6 +97,6 @@ public class CNetworkManager {
     }
 
     public interface OnNetworkManagerInitializedListener {
-        void OnInitialized();
+        void OnInitialized(boolean isOK);
     }
 }

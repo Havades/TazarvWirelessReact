@@ -54,14 +54,19 @@ public class MainApplication extends Application implements ReactApplication {
   }
     @Override
   public void onCreate() {
-      super.onCreate();
-      SoLoader.init(this, /* native exopackage */ false);
-      initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+        initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
-      CAppStatus.ServiceCommander = new CServiceCommander();
-      CAppStatus.NetworkManager = new CNetworkManager(getApplicationContext());
-      CAppStatus.NetworkManager.InitializeNetwork();
-  }
+        CAppStatus.NetworkManager = new CNetworkManager(getApplicationContext());
+        CAppStatus.NetworkManager.InitializeNetwork(new CNetworkManager.OnNetworkManagerInitializedListener() {
+            @Override
+            public void OnInitialized(boolean isOK) {
+                if (isOK)
+                    CAppStatus.ServiceCommander = new CServiceCommander(CAppStatus.NetworkManager.getMainTCP());
+            }
+        });
+    }
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());

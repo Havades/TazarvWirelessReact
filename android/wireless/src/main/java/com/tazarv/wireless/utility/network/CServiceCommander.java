@@ -2,13 +2,20 @@ package com.tazarv.wireless.utility.network;
 
 import android.bluetooth.BluetoothServerSocket;
 
+import com.tazarv.taclibrary.Classes.CTCPClient;
+
 public class CServiceCommander {
     private int mUserId = 0;
+    private CTCPClient mTCP = null;
+
+    public CServiceCommander(CTCPClient aTCPClient) {
+        mTCP = aTCPClient;
+    }
 
     public ServiceCommanderResult InitUser(int aUserId) {
         ServiceCommanderResult lResult = new ServiceCommanderResult();
         try {
-            CCommandExecutor lCE = new CCommandExecutor();
+            CCommandExecutor lCE = new CCommandExecutor(mTCP);
             String lServiceResult = lCE.runCommand(String.format("<InitUser>HD1,%s", aUserId));
 
             if (!lServiceResult.startsWith("Error:")) {

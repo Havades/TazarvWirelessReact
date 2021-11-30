@@ -114,12 +114,10 @@ public final class GSMDecoder
 
         int i=0;
 
-        /*
         if (((c[i]>>4) & 0xf) != GSM_MAGIC)
         {
             throw new InvalidGSMFrameException();
         }
-        */
 
         m_LARc[0]  = ((c[i++] & 0xF) << 2);           /* 1 */
         m_LARc[0] |= ((c[i] >> 6) & 0x3);

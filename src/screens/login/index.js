@@ -3,6 +3,7 @@ import { View, Text , TextInput, TouchableOpacity, Alert, Switch } from 'react-n
 import { useSelector} from 'react-redux'
 import styles from './style'
 import { LoginTemplate , ScreenTemplate , AppBar} from './../../components/template'
+
 const Login = (props) => {        
     const {width ,height ,isPortrait} = useSelector((state) => state.screen)
     const [userInfo , setUserInfo] = useState({username : '' , password : ''});

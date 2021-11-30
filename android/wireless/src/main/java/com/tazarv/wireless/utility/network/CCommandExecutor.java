@@ -2,6 +2,7 @@ package com.tazarv.wireless.utility.network;
 
 
 import com.tazarv.taclibrary.Classes.CSocketData;
+import com.tazarv.taclibrary.Classes.CTCPClient;
 import com.tazarv.wireless.utility.network.CRunCommandTask.RunCommandTaskParams;
 
 import org.json.JSONArray;
@@ -12,9 +13,13 @@ public class CCommandExecutor {
 
     private CRunCommandTask.OnTaskFinishListener mOnRunFinish = null;
     String mTableCommand = "", mTableName = "", mTablePKId = "";
+    CTCPClient mTCP = null;
 
-    public CCommandExecutor() {}
-    public CCommandExecutor(CRunCommandTask.OnTaskFinishListener aOnRunFinish) {
+    public CCommandExecutor(CTCPClient aTCPClient) {
+        mTCP = aTCPClient;
+    }
+    public CCommandExecutor(CTCPClient aTCPClient, CRunCommandTask.OnTaskFinishListener aOnRunFinish) {
+        mTCP = aTCPClient;
         mOnRunFinish = aOnRunFinish;
     }
 
@@ -28,10 +33,10 @@ public class CCommandExecutor {
             lParams.onTaskFinishListener = mOnRunFinish;
             lParams.IsSQLCommand = false;
 
-            CRunCommandTask lRCT = new CRunCommandTask(lParams);
+            CRunCommandTask lRCT = new CRunCommandTask(lParams, mTCP);
             lRCT.execute(aCommand);
 
-            if(aIsWait) {
+            if (aIsWait) {
                 while (lRCT.isTaskRunning() && !lRCT.isTaskFinished()) {
                     String lK = "";
                     Thread.sleep(100);
@@ -58,10 +63,10 @@ public class CCommandExecutor {
             RunCommandTaskParams lParams = new RunCommandTaskParams();
             lParams.onTaskFinishListener = mOnRunFinish;
 
-            CRunCommandTask lRCT = new CRunCommandTask(lParams);
+            CRunCommandTask lRCT = new CRunCommandTask(lParams, mTCP);
             lRCT.execute(aCommand);
 
-            if(aIsWait) {
+            if (aIsWait) {
                 while (lRCT.isTaskRunning() && !lRCT.isTaskFinished()) {
                     String lK = "";
                     Thread.sleep(100);
@@ -111,7 +116,7 @@ public class CCommandExecutor {
         lParams.TableName = aTableName;
         lParams.PKIdName = aPKIdName;
 
-        CRunCommandTask lRCT = new CRunCommandTask(lParams);
+        CRunCommandTask lRCT = new CRunCommandTask(lParams, mTCP);
         lRCT.execute(aTableCommand);
     }
 

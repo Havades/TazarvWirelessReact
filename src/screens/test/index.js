@@ -20,13 +20,11 @@ const Test = (props) => {
             onPress={() =>{ 
               //const data = DBDataModule.GetData("Tbl_User","UserId=6")
 
-              PlayerModule.PlaySound();
+              //PlayerModule.PlaySound();
 
-                /*
                 AuthModule.Login({Username:'hashemi', Password:'123', IsRemember:true},(error,data)=>{
                   console.log(data,error);
                 });
-                */
 
                 /*
                 AuthModule.CheckRemember((error,data)=>{

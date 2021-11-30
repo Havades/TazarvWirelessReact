@@ -17,6 +17,7 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
     private boolean mIsRunning = false;
     private CSocketData mSD = null;
     private String mResultData = "";
+    private CTCPClient mTCP = null;
 
     private String mErrorMessage = "";
 
@@ -36,9 +37,10 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
         return mErrorMessage;
     }
 
-    public CRunCommandTask(RunCommandTaskParams aParams) {
+    public CRunCommandTask(RunCommandTaskParams aParams, CTCPClient aTCPClient) {
         mErrorMessage = "";
         mTaskParams = aParams;
+        mTCP = aTCPClient;
         if(mTaskParams==null)
             mTaskParams = new CRunCommandTask.RunCommandTaskParams();
     }
@@ -57,11 +59,10 @@ public class CRunCommandTask extends AsyncTask<String,Void,String> {
 
         try {
             String lCommand = (mTaskParams.IsSQLCommand ? "<SQL>" : "") + aCommands[0];
-            CTCPClient lTCP = CAppStatus.NetworkManager.getMainTCP();
 
-            boolean lIsTimeout = lTCP.WaitToEndRunning();
+            boolean lIsTimeout = mTCP.WaitToEndRunning();
             if(!lIsTimeout) {
-                lResultData = lTCP.runCommand(lCommand, null, null, 20000);
+                lResultData = mTCP.runCommand(lCommand, null, null, 20000);
                 if (lResultData.isEmpty()) {
                     String lErr = CAppStatus.NetworkManager.getMainTCP().getErrorMessage();
                     throw new Exception(lErr);
