@@ -3,7 +3,7 @@ import {Room} from './../.././../components/organism'
 import styles from './style'
 import {ScreenTemplate} from './../../../components/template'
 import data from './../../../assets/dummy/chatroom.json'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 const ActiveUsers = () => {
     const [rooms, setRooms] = useState([])
     useEffect(() => {
@@ -15,11 +15,13 @@ const ActiveUsers = () => {
     );
     return (
         <ScreenTemplate>
-            <FlatList
-                data={rooms}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            />
+            <View style={styles.container}>
+                <FlatList
+                    data={rooms}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                />
+            </View>
         </ScreenTemplate>
     )
 }

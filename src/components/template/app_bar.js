@@ -12,24 +12,10 @@ const AppBar = (props) => {
         {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
         <LinearGradient colors={['black', 'grey']} style={styles.linearGradient}>
         <View style={styles.view}>
-        {props.leftActions.map((item, index) => (
-                <IconButton 
-                    key={index}
-                    style={{
-                        position : 'absolute' ,
-                        justifyContent : 'center' , 
-                        left : index * 30 + 1
-                    }}
-                    icon={item.icon.name} 
-                    color={item.icon.color} 
-                    size={30} 
-                    onPress={() => item.action}
-                />
-            ))}
             <Text style={isLoggedIn ? styles.title : [styles.title , {marginRight : 50}] }>
                 {props.title}
             </Text>
-            { !isLoggedIn || !props.isNavigable ? null : <IconButton
+            { !isLoggedIn ? null : <IconButton
                 icon="menu"
                 color="white"
                 size={40}

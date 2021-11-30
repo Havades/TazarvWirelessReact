@@ -5,5 +5,7 @@ export default StyleSheet.create({
         flex : 1,
         display : 'flex',
         flexDirection : 'column',
+        marginLeft : 5,
+        marginRight : 5
     },
 })
