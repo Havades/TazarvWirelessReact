@@ -16,7 +16,7 @@ const TabNavigation = (props) => {
           activeTintColor: 'orange',
           inactiveTintColor: 'white',
           labelStyle: {
-            textAlign: 'center' ,fontWeight : 'bold' , fontSize : 22
+            textAlign: 'center' ,fontWeight : 'bold' , fontSize : 18
           },
           indicatorStyle: {
             borderBottomColor: 'orange',
@@ -33,7 +33,7 @@ const TabNavigation = (props) => {
               }}/>
               <Tab.Screen name={"ActiveUsers"} children={() => <ActiveUsers upperNav={props}/>} options={{ tabBarLabel: 'کاربران آنلاین',
                   tabBarIcon:({focused})=><MaterialCommunityIcons name="wifi" size={25} color={focused ? "orange":"white"}/>
-                }}/>
+              }}/>
           </Tab.Navigator>
         </NavigationContainer>
     )

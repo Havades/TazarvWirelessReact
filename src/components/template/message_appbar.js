@@ -24,7 +24,14 @@ const MessageAppBar = (props) => {
         <Appbar.Content
             title={<Text ellipsizeMode={'tail'} style={styles.AppbarText}>{props.title}</Text>}
             subtitle={props.subtitle} style={styles.text} />
-        {props.mute ? <MaterialCommunityIcons name="volume-variant-off" size={30} color={Colors.grey500}/> : null}
+        <View style={{width : isLandscape ? 60 : 30, flexDirection : isLandscape ? 'row' : 'column' }}>
+            <View style={{flex : 1}}>
+            {props.mute ? <MaterialCommunityIcons name="volume-variant-off" size={30} color={Colors.grey500}/> : null}
+            </View>
+            <View style={{flex : 1}}>
+            {props.mute ? <MaterialCommunityIcons name="filter" size={30} color={Colors.green300}/> : null}
+            </View>
+        </View>
         {props.connected ? <Ionicons style={styles.connected} name="shield-checkmark" size={30} color={Colors.orange400}/> 
             : <Image style={styles.image} source={require('./../../assets/connection_wait.gif')}/>}
         <Appbar.Action icon="dots-vertical" size={35} onPress={() => props.viibility(prev => !prev)} />
