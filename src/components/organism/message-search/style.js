@@ -42,5 +42,9 @@ export default StyleSheet.create({
     datePicker : {},
     timePicker: {},
     comboList : {},
+    closeBtn : {
+        margin : 0,
+        alignSelf : 'flex-end'
+    },
     button : {}
 })

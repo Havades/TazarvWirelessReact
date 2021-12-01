@@ -1,13 +1,14 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Pressable } from 'react-native'
 import DatePicker from '@mohamadkh75/react-native-jalali-datepicker';
 
 const JalaliDatePicker = (props) => {
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.parent} onPress={() => props.close()}>
+        <Pressable style={styles.container} onPress={() => {}}>
         <DatePicker
             style={styles.main}
-            selected='1400/10/10'
+            selected={props.initDate}
             dateSeparator='/'
             minDate='1400/1/1'
             maxDate='1420/1/1'
@@ -35,17 +36,23 @@ const JalaliDatePicker = (props) => {
             disabledTextColor='#4bcffa66'
             onDateChange={date => props.onDateChange(date)}
         />
-        </View>
+        </Pressable>
+        </Pressable>
     );
 }
 const styles = StyleSheet.create({
+    parent : {
+        flex : 1,
+        width : '100%',
+        alignContent : 'center',
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
     container : {
         width: '95%',
         height: '80%',
         maxWidth : 500,
         maxHeight : 400,
-        alignContent : 'center',
-        alignSelf : 'center'
     },
     main : {
         flex : 1,
@@ -104,7 +111,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3
     },
-    // eachMonthTextStyle :{ fontSize: 16, color: 'white' },
     eachMonthTextStyle :{ fontSize: 16, color: 'black' },
     weekdaysContainerStyle : { height: '15%' },
     weekdayStyle : {

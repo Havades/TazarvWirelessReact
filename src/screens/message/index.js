@@ -4,7 +4,6 @@ import {MessageAppBar , ScreenTemplate} from '../../components/template'
 import { Button, Menu, Divider, Provider, Colors } from 'react-native-paper';
 import {styles , theme} from './style'
 import { MessageSearch } from './../../components/organism'
-import {JalaliDatePicker} from './../../components/base'
 
 const Message = (props) => {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -40,19 +39,18 @@ const Message = (props) => {
         {/*-------------------Main Part--------------------*/}
         <View style={styles.container}>
             <Modal
-            style={{height : 500 , width : 300}}
+            style={{height : 20 , width : 20 , margin : 0}}
             animationType="slide"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
             console.log("Modal has been closed.");
-            // setModalVisible(false);
+            setModalVisible(false);
             }}
             >
-                <MessageSearch />
+                <MessageSearch closeModal={() => setModalVisible(false)}/>
             </Modal>
             
-            <JalaliDatePicker onDateChange={(date) => console.log('--date by Props--', date)}/>
             <Button mode="contained" onPress={()=> setModalVisible(true)}> ShowModal </Button>
             <Button mode="contained" onPress={()=> setIsConnected(prev => !prev)}> connect </Button>
         </View>
