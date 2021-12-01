@@ -1,9 +1,19 @@
-import React from 'react'
-import { Alert, Button, NativeModules, Text, View, StyleSheet } from 'react-native';
+import React, {useState} from 'react'
+import { Alert, Button, NativeModules, Text, View, StyleSheet, NativeEventEmitter } from 'react-native';
 import { AppBar} from './../../components/template'
+
 const {TCPModule, DBDataModule, AuthModule, PlayerModule} = NativeModules;
 
 const Test = (props) => {
+
+    const [ info , setInfo ] = useState("");
+
+    const eventEmitter = new NativeEventEmitter(NativeModules.AuthModule);
+    const eventListener = eventEmitter.addListener('updateInfo', (event) => {
+          console.log(event)
+          setInfo(event);
+       });
+    
     return (
         <>
         <AppBar {...props } title='تست' isShowSearch={false}/>
@@ -35,6 +45,7 @@ const Test = (props) => {
               //console.log("Login Result: " , data)
              //  Alert.alert(model.Id + "-\n-" + model.IP + "-\n-" + model.Port + "-\n-" + model.IsConnected);
             }}/>
+            <Text>{info}</Text>
         </View>
         <View style={{flex : 1}}>
           <Button title="Start SQLite" style ={styles.DBButton}

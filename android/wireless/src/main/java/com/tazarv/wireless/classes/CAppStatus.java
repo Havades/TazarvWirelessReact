@@ -4,12 +4,16 @@ import com.tazarv.wireless.utility.network.CDataManager;
 import com.tazarv.wireless.utility.network.CServiceCommander;
 import com.tazarv.wireless.utility.network.CNetworkManager;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 public class CAppStatus {
     public static int Port = 6835;
 
     public static CNetworkManager NetworkManager = null;
     public static CServiceCommander ServiceCommander = null;
     public static CDataManager DataManager = null;
+    public static TreeMap<Integer, OnlineUserInfo> OnlineUsers = null;
 
     public static int LoginUserId = 0;
     public static String LoginUsername = "";

@@ -5,17 +5,21 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.tazarv.taclibrary.Classes.CEncrypt;
 import com.tazarv.wireless.classes.CAppStatus;
+import com.tazarv.wireless.classes.OnlineUserInfo;
 import com.tazarv.wireless.utility.network.CDataManager;
 import com.tazarv.wireless.utility.network.CServiceCommander.ServiceCommanderResult;
 
@@ -123,7 +127,33 @@ public class AuthModule extends ReactContextBaseJavaModule {
                             lPrefEditor.apply();
                         }
 
-                        CAppStatus.DataManager = new CDataManager();
+                        CAppStatus.DataManager = new CDataManager(new CDataManager.DataManagerListener() {
+                            @Override
+                            public void OnUpdateOnlineUsers() {
+                                String lUserList = "";
+                                DBDataModule lDBData = new DBDataModule(mContext);
+                                for(OnlineUserInfo lOUser: CAppStatus.OnlineUsers.values()) {
+
+                                    ReadableArray lWA = lDBData.GetData(
+                                            "Tbl_User",
+                                            String.format("UserId='%s'", lOUser.UserId)
+                                    );
+
+                                    String lUsername = "";
+                                    if( lWA.size() > 0 ) {
+                                        ReadableMap lMap = lWA.getMap(0);
+                                        lUsername = lMap.getString("Username");
+                                    }
+
+                                    lUserList +=
+                                            (lUserList.isEmpty() ? "" : ",") +
+                                            (lOUser.IsBusy ? "(" : "") +
+                                            String.format("%s: %s", lOUser.UserId, lUsername) +
+                                            (lOUser.IsBusy ? ")" : "");
+                                }
+                                sendEvent(mContext, "updateInfo", lUserList);
+                            }
+                        });
                         CAppStatus.DataManager.Start();
 
                     } else
@@ -163,5 +193,13 @@ public class AuthModule extends ReactContextBaseJavaModule {
         } catch (Exception ex) {
             Log.e(TAG, "Login: " + ex.getMessage());
         }
+    }
+
+    private void sendEvent(ReactContext reactContext,
+                           String eventName,
+                           Object params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 }
