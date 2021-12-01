@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text , StyleSheet , Image} from 'react-native'
+import React , {useEffect , useState} from 'react'
+import { View, Text , StyleSheet , Image , Dimensions} from 'react-native'
 import { Appbar ,IconButton, Colors ,Button,Menu, Divider, Provider } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -7,9 +7,18 @@ import { useSelector} from 'react-redux'
 
 const MessageAppBar = (props) => {
     const {isTablet , isLandscape} = useSelector((state) => state.screen)
+    const [dim , setDim] = useState({x: 0, y:0 , height: 0, width: 0})
+    useEffect(() => {
+        const window = Dimensions.get('window')
+        if(isTablet && isLandscape && window.width === dim.width)
+            props.navigation.goBack();
+    }, [dim])
     return (
     <>
-    <Appbar.Header style={styles.header}>
+    <Appbar.Header style={styles.header} onLayout={(e)=> {
+        const location = e.nativeEvent.layout;
+        setDim(location)
+    }}>
         {isTablet && isLandscape ? null :
             <Appbar.BackAction style={styles.backBtn} size={35} onPress={() => {props.navigation.goBack()}} />}
         <Appbar.Content

@@ -16,14 +16,14 @@ const TabNavigation = (props) => {
           activeTintColor: 'orange',
           inactiveTintColor: 'white',
           labelStyle: {
-            textAlign: 'center' ,fontWeight : 'bold' , fontSize : 18
+            textAlign: 'center' ,fontWeight : 'bold' , fontSize : 22
           },
           indicatorStyle: {
             borderBottomColor: 'orange',
             borderBottomWidth: 3,
           }
           ,}}
-            initialRouteName={"Channels"}
+            initialRouteName={'Channels'}
             >
               <Tab.Screen name={"Users"} children={() => <Users upperNav={props}/>} options={{ tabBarLabel: 'کاربران',
                   tabBarIcon:({focused})=><MaterialCommunityIcons name="account-group" size={25} color={focused ? "orange":"white"}/>

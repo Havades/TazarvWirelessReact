@@ -20,6 +20,7 @@ const Profile = (props) => {
                     <TextInput style={styles.input}
                         onChangeText={(e) => onChangeHandle(e , "oldPass")}
                         placeholder="admin"
+                        secureTextEntry={true}
                     />
                     <Text style={styles.text}>
                         رمز عبور جدید 
