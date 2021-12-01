@@ -1,5 +1,5 @@
-import PersianDatePicker from './persian_date_picker'
+import JalaliDatePicker from './jalali-date-picker'
 
 export {
-    PersianDatePicker
+    JalaliDatePicker
 }

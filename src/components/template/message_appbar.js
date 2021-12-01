@@ -24,12 +24,12 @@ const MessageAppBar = (props) => {
         <Appbar.Content
             title={<Text ellipsizeMode={'tail'} style={styles.AppbarText}>{props.title}</Text>}
             subtitle={props.subtitle} style={styles.text} />
-        <View style={{width : isLandscape ? 60 : 30, flexDirection : isLandscape ? 'row' : 'column' }}>
+        <View style={{width : isLandscape ? 60 : 30, flexDirection : isLandscape ? 'row' : 'column'}}>
             <View style={{flex : 1}}>
-            {props.mute ? <MaterialCommunityIcons name="volume-variant-off" size={30} color={Colors.grey500}/> : null}
+            {props.mute ? <MaterialCommunityIcons name="volume-variant-off" size={isLandscape ? 30 : 25} color={Colors.grey500}/> : null}
             </View>
             <View style={{flex : 1}}>
-            {props.mute ? <MaterialCommunityIcons name="filter" size={30} color={Colors.green300}/> : null}
+            {props.mute ? <MaterialCommunityIcons name="filter" size={isLandscape ? 30 : 25} color={Colors.green300}/> : null}
             </View>
         </View>
         {props.connected ? <Ionicons style={styles.connected} name="shield-checkmark" size={30} color={Colors.orange400}/> 
