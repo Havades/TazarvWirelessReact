@@ -5,7 +5,8 @@ apply from: file("../node_modules/@react-native-community/cli-platform-android/n
 include ':wireless'
 
 include ':taclibrary'
-project(':taclibrary').projectDir = new File(settingsDir, '../../TZAndroid/taclibrary')
+project(':taclibrary').projectDir = new File(rootProject.projectDir, '../../TZAndroid/taclibrary')
+//project(':taclibrary').projectDir = new File(settingsDir, '../../TZAndroid/taclibrary')
 
 include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
